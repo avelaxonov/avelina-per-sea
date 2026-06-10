@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Weaver's Demise — Writing · Avelina, per sea</title>
+<meta name="description" content="The literary side of Avelina Axonov — poetry, prose, songs, and academic writing. Per sea." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
+<style>
+/* Writing register: warmer, amber-forward, on a deep-teal field */
+body { background: var(--deep-sea); }
+.w-accent { color: var(--amber); }
+
+/* HERO */
+.w-hero { min-height: 78vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 80px; }
+.w-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(120% 90% at 80% 15%, rgba(196,154,90,0.14), transparent 55%), radial-gradient(80% 70% at 10% 90%, rgba(107,191,190,0.10), transparent 60%); }
+.w-hero-inner { position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); width: 100%; }
+.w-back { margin-bottom: 2rem; }
+.w-kicker { font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--amber); }
+.w-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(3rem, 9vw, 6.6rem); line-height: 0.95; letter-spacing: -0.03em; color: var(--text-light); margin: 1rem 0; }
+.w-title em { font-style: italic; font-weight: 500; color: var(--amber); }
+.w-tagline { font-family: var(--font-display); font-style: italic; font-size: clamp(1.2rem, 2.6vw, 1.7rem); color: var(--pale); max-width: 30ch; }
+.w-penname { margin-top: 2rem; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; color: var(--pale); display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+.w-penname b { color: var(--amber); font-weight: 500; }
+
+/* MEANING strip */
+.w-meaning { border-top: 1px solid var(--pale-dim); border-bottom: 1px solid var(--pale-dim); background: rgba(196,154,90,0.04); }
+.w-meaning .wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(2rem,5vw,4rem); align-items: center; padding-top: clamp(3.5rem,7vw,5.5rem); padding-bottom: clamp(3.5rem,7vw,5.5rem); }
+.silk-poem-lg { font-family: var(--font-display); font-style: italic; font-size: clamp(1.5rem, 3vw, 2.1rem); line-height: 1.7; color: var(--text-light); }
+.silk-poem-lg .em { color: var(--amber); }
+.w-meaning p { font-size: 1.02rem; color: var(--pale); max-width: 48ch; }
+.w-meaning p b { color: var(--text-light); }
+
+/* LIBRARY */
+.lib-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; }
+.tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; }
+.tab { font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.55rem 1.05rem; border: 1px solid var(--pale-dim); border-radius: 100px; color: var(--pale); background: transparent; cursor: pointer; transition: all 0.22s; }
+.tab:hover { border-color: var(--amber); color: var(--amber); }
+.tab.active { background: var(--amber); border-color: var(--amber); color: var(--deep-sea); }
+
+.lib-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+.work { border: 1px solid var(--pale-dim); border-radius: 6px; padding: 1.6rem 1.7rem; background: rgba(168,206,206,0.03); display: flex; flex-direction: column; transition: transform 0.3s var(--ease-out), border-color 0.3s, background 0.3s; }
+.work:hover { transform: translateY(-5px); border-color: var(--amber); background: rgba(196,154,90,0.05); }
+.work-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.7rem; }
+.work-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.badge { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.55rem; border-radius: 100px; border: 1px solid var(--pale-dim); color: var(--pale); }
+.badge.cat { color: var(--amber); border-color: rgba(196,154,90,0.4); }
+.badge.lang { color: var(--aqua); border-color: var(--aqua-dim); }
+.work h3 { font-size: 1.35rem; color: var(--text-light); line-height: 1.15; }
+.work h3 .ru { font-weight: 500; }
+.work .work-status { font-family: var(--font-mono); font-size: 0.68rem; color: var(--pale); margin-top: 0.3rem; opacity: 0.8; }
+.work .excerpt { font-size: 0.95rem; color: var(--pale); margin-top: 1rem; line-height: 1.65; flex: 1; }
+.work .excerpt.italic { font-style: italic; font-family: var(--font-display); color: var(--text-light); font-size: 1.05rem; }
+.work .excerpt .todo { font-style: italic; color: var(--amber); }
+.work .work-foot { margin-top: 1.3rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; color: var(--amber); display: flex; align-items: center; gap: 0.5rem; }
+.work.feature { grid-column: span 2; background: linear-gradient(135deg, rgba(196,154,90,0.08), rgba(107,191,190,0.04)); }
+.work.feature h3 { font-size: 1.8rem; }
+.work.feature .excerpt { font-size: 1.1rem; }
+
+/* view toggle */
+.view-toggle { display: flex; gap: 0.4rem; }
+.vt { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.5rem 0.85rem; border: 1px solid var(--pale-dim); border-radius: 4px; color: var(--pale); background: transparent; cursor: pointer; transition: all 0.2s; }
+.vt:hover { border-color: var(--amber); color: var(--amber); }
+.vt.active { background: rgba(196,154,90,0.14); border-color: var(--amber); color: var(--amber); }
+.vt span { width: 5px; height: 5px; background: currentColor; display: inline-block; }
+.vt span.bar { width: 12px; height: 2px; }
+.vt[data-view="grid"] { gap: 2px 2px; }
+.vt[data-view="grid"] { padding-left: 0.7rem; }
+.vt[data-view="list"] { flex-direction: row; }
+
+/* LIST view */
+.lib-grid.list { display: block; }
+.lib-grid.list .work { grid-column: auto !important; flex-direction: row; align-items: center; gap: 1.5rem; padding: 1.1rem 1.5rem; margin-bottom: 0.6rem; border-radius: 5px; }
+.lib-grid.list .work:hover { transform: translateX(5px); }
+.lib-grid.list .work-top { margin-bottom: 0; order: 3; flex-shrink: 0; }
+.lib-grid.list .work h3 { font-size: 1.15rem; order: 1; flex-shrink: 0; min-width: 200px; }
+.lib-grid.list .work h3 br { display: none; }
+.lib-grid.list .work h3 span[style] { display: none; }
+.lib-grid.list .work-status { display: none; }
+.lib-grid.list .excerpt { margin-top: 0; order: 2; flex: 1; font-size: 0.88rem !important; font-style: normal !important; font-family: var(--font-body) !important; color: var(--pale) !important; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.lib-grid.list .work-foot { display: none; }
+.lib-grid.list .work.feature { background: rgba(196,154,90,0.06); }
+@media (max-width: 720px) {
+  .lib-grid.list .work { flex-wrap: wrap; gap: 0.6rem; }
+  .lib-grid.list .work h3 { min-width: 0; }
+  .lib-grid.list .excerpt { display: none; }
+}
+
+.lib-note { margin-top: 2.5rem; font-family: var(--font-mono); font-size: 0.78rem; color: var(--pale); font-style: italic; padding: 1.2rem 1.5rem; border-left: 2px solid var(--amber); background: rgba(196,154,90,0.04); }
+
+/* social */
+.w-social { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem; }
+.w-social a { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.06em; color: var(--pale); border-bottom: 1px solid var(--pale-dim); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+.w-social a:hover { color: var(--amber); border-color: var(--amber); }
+
+/* sort bar */
+.sortbar { display: flex; align-items: center; gap: 0.7rem; margin-top: 1.2rem; flex-wrap: wrap; }
+.sortbar-label { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pale); }
+.sortbar select { font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-light); background: rgba(168,206,206,0.06); border: 1px solid var(--pale-dim); border-radius: 4px; padding: 0.5rem 0.85rem; cursor: pointer; transition: border-color 0.2s; }
+.sortbar select:hover { border-color: var(--amber); }
+.sortbar select:focus { outline: none; border-color: var(--amber); }
+.sortbar-note { font-family: var(--font-mono); font-size: 0.68rem; font-style: italic; color: var(--pale); opacity: 0.7; }
+.work .date-badge { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.06em; color: var(--pale); border: 1px solid var(--pale-dim); border-radius: 100px; padding: 0.25rem 0.55rem; }
+
+@media (max-width: 880px) {
+</style>
+</head>
+<body>
+
+<nav class="nav scrolled">
+  <a href="index.html" class="nav-logo"><span class="dot"></span>Avelina<span class="comma">,</span>&nbsp;per sea</a>
+  <div class="nav-links">
+    <a href="index.html">← Per Sea</a>
+    <a href="#poetry-anchor">Poetry</a>
+    <a href="#prose-anchor">Prose</a>
+    <a href="#academic-anchor">Academic</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="index.html#contact" class="cv">Contact</a>
+  </div>
+  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<header class="w-hero">
+  <div class="w-hero-inner">
+    <div class="w-back"><a href="index.html" class="backlink">← back to per sea</a></div>
+    <div class="w-kicker" data-reveal="up">Writing &amp; Ideas · the humanities side</div>
+    <h1 class="w-title" data-reveal="up" data-delay="80">Weaver's <em>Demise</em></h1>
+    <p class="w-tagline" data-reveal="up" data-delay="160">Shards of words create a kaleidoscope of stories.</p>
+    <div class="w-penname" data-reveal="up" data-delay="240">
+      <span>Writing as <b>А. Velvet</b></span>
+      <span>Russian &amp; English · studying Japanese</span>
+    </div>
+    <div class="w-social" data-reveal="up" data-delay="300">
+      <a href="https://weaversdemise.wordpress.com/" target="_blank" rel="noopener">weaversdemise.wordpress.com ↗</a>
+      <a href="https://instagram.com/weaver.s_demise" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:weavers.demise@gmail.com">weavers.demise@gmail.com</a>
+    </div>
+  </div>
+</header>
+
+<!-- MEANING -->
+<section class="w-meaning">
+  <div class="wrap">
+    <div class="silk-poem-lg" data-reveal="right">Silkworms weave their cocoons,<br />then are killed inside them<br />to make the silk.<br /><span class="em">Their cradle becomes their coffin.</span></div>
+    <div data-reveal="left">
+      <p>The name <b>Weaver's Demise</b> holds that image — a making that costs the maker. It's a powerful metaphor that goes well beyond the death of a silkworm.</p>
+      <p style="margin-top:1.2rem;">I'm a Russian author who moved to the U.S. in high school. My work ranges from poetry and music to short stories and novels — in English and Russian, with Japanese on the way. This is where the science sets down its instruments and the writing picks up.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LIBRARY -->
+<section class="bg-dark">
+  <div class="wrap">
+    <div class="lib-head">
+      <div>
+        <div class="eyebrow w-accent" data-reveal="up" style="color:var(--amber);">The Library</div>
+        <h2 class="section-title" data-reveal="up" style="margin-top:0.8rem;">Everything, in one shelf.</h2>
+      </div>
+      <div class="view-toggle" data-reveal="up">
+        <button class="vt active" data-view="grid" aria-label="Grid view"><span></span><span></span><span></span><span></span> Cards</button>
+        <button class="vt" data-view="list" aria-label="List view"><span class="bar"></span><span class="bar"></span><span class="bar"></span> List</button>
+      </div>
+    </div>
+    <div class="tabs" data-reveal="up" id="tabs">
+      <button class="tab active" data-filter="all">All</button>
+      <button class="tab" data-filter="poetry">Poetry</button>
+      <button class="tab" data-filter="prose">Prose</button>
+      <button class="tab" data-filter="songs">Songs</button>
+      <button class="tab" data-filter="academic">Academic</button>
+    </div>
+
+    <div class="sortbar" data-reveal="up">
+      <span class="sortbar-label">Sort</span>
+      <select id="sortSel" aria-label="Sort works">
+        <option value="featured">Featured order</option>
+        <option value="title">Title · A → Z</option>
+        <option value="title-desc">Title · Z → A</option>
+        <option value="date-new">Date written · newest</option>
+        <option value="date-old">Date written · oldest</option>
+        <option value="lang">Language</option>
+      </select>
+      <span class="sortbar-note">dates fill in as you submit each piece</span>
+    </div>
+
+    <div class="lib-grid" id="libGrid">
+
+      <!-- FEATURE: signature short story -->
+      <article class="work feature" data-cat="prose" id="prose-anchor" data-lang="en" data-date="" data-title="A Bird and A Star">
+        <div class="work-top"><div class="work-badges"><span class="badge cat">Short story</span><span class="badge lang">English</span><span class="badge">Award winner</span></div></div>
+        <h3>A Bird and A Star</h3>
+        <div class="work-status">Sci-fi · Space Club Pick Award, Temple University Japan Campus</div>
+        <p class="excerpt italic">"When the stars set themselves in a pattern, people desperately try to find a sign. But in the process, something gets irrevocably lost."</p>
+        <p class="excerpt">A sci-fi short story about two college girls trying to uncover the truth. <span class="todo">[Owner: paste full text or link a reading sub-page]</span></p>
+        <div class="work-foot">Read the full story →</div>
+      </article>
+
+      <!-- POETRY -->
+      <article class="work" data-cat="poetry" id="poetry-anchor" data-lang="en" data-date="" data-title="Weaving the Words">
+        <div class="work-top"><div class="work-badges"><span class="badge cat">Poem</span><span class="badge lang">English</span></div></div>
+        <h3>Weaving the Words</h3>
+        <div class="work-status">Opening piece · the heart of the collection</div>
+        <p class="excerpt italic">"Silkworms weave their cocoons, then are killed inside them to make the silk. Their cradle becomes their coffin."</p>
+        <div class="work-foot">Read →</div>
+      </article>
+
+      <article class="work" data-cat="poetry" data-lang="ru" data-date="" data-title="730 Дней">
+        <div class="work-top"><div class="work-badges"><span class="badge cat">Poem</span><span class="badge lang">Русский</span></div></div>
+        <h3><span class="ru">730 Дней</span></h3>
+        <div class="work-status">Russian poetry</div>
+        <p class="excerpt"><span class="todo">[Owner: paste the poem text — I'll set the typography]</span></p>
+        <div class="work-foot">Read →</div>
+      </article>
+
+      <article class="work" data-cat="poetry" data-lang="ru" data-date="" data-title="Бесконечность">
+        <div class="work-top"><div class="work-badges"><span class="badge cat">Poem</span><span class="badge lang">Русский</span></div></div>
+        <h3><span class="ru">Бесконечность</span></h3>
+        <div class="work-status">Russian poetry</div>
+        <p class="excerpt"><span class="todo">[Owner: paste the poem text]</span></p>
+        <div class="work-foot">Read →</div>
+      </article>
+
+      <article class="work" data-cat="poetry" data-lang="mixed" data-date="" data-title="Selected English Poetry">
+        <div class="work-status">A growing set — choose 3–5 to feature</div>
+        <p class="excerpt"><span class="todo">[Owner: pick the poems you want forward-facing; the rest can live on a "more" sub-page]</span></p>
+        <div class="work-foot">Browse →</div>
+      </article>
+
+      <!-- PROSE -->
+      <article class="work" data-cat="prose" data-lang="mixed" data-date="" data-title="My Japanese Shenanigans">
+        <h3>私の日本の珍道中<br /><span style="font-size:1rem; color:var(--pale); font-weight:500;">My Japanese Shenanigans</span></h3>
+        <div class="work-status">Planned · autobiographical, comic format</div>
+        <p class="excerpt">A planned collection of autobiographical short stories — awkward, fun, comical, sweet adventures in Japan, told simply.</p>
+        <div class="work-foot">In the works →</div>
+      </article>
+
+      <article class="work" data-cat="prose" data-lang="mixed" data-date="" data-title="Novels-in-progress">
+        <h3>Novels-in-progress</h3>
+        <div class="work-status">Long-form · slow-cooked between semesters</div>
+        <p class="excerpt"><span class="todo">[Owner: add a working title + 2–3 sentence logline when ready]</span></p>
+        <div class="work-foot">Coming →</div>
+      </article>
+
+      <article class="work" data-cat="prose" data-lang="en" data-date="" data-title="Essays and Non-Fiction">
+        <h3>Essays &amp; Non-Fiction</h3>
+        <div class="work-status">Reflective pieces</div>
+        <p class="excerpt"><span class="todo">[Owner: add pieces — or fold conservation writing in here]</span></p>
+        <div class="work-foot">Coming →</div>
+      </article>
+
+      <!-- SONGS -->
+      <article class="work" data-cat="songs" data-lang="mixed" data-date="" data-title="Lyrics and Music">
+        <h3>Lyrics &amp; Music</h3>
+        <div class="work-status">Words written to be sung · flute on the side</div>
+        <p class="excerpt"><span class="todo">[Owner: select a few lyrics, or embed audio/video links]</span></p>
+        <div class="work-foot">Listen →</div>
+      </article>
+
+      <!-- ACADEMIC -->
+      <article class="work" data-cat="academic" id="academic-anchor" data-lang="en" data-date="" data-title="Garden of Women">
+        <div class="work-top"><div class="work-badges"><span class="badge cat">Honors thesis</span></div></div>
+        <h3>"Garden of Women"</h3>
+        <div class="work-status">EAL 376 · in progress</div>
+        <p class="excerpt"><span class="todo">[Owner to add framing — 2–3 sentences]</span></p>
+        <div class="work-foot">About this work →</div>
+      </article>
+
+      <article class="work" data-cat="academic" data-lang="ja" data-date="" data-title="Flowers for Sale">
+        <h3>"Flowers for Sale"</h3>
+        <div class="work-status">Japanese major senior thesis</div>
+        <p class="excerpt"><span class="todo">[Owner to add framing — 2–3 sentences]</span></p>
+        <div class="work-foot">About this work →</div>
+      </article>
+
+      <article class="work" data-cat="academic" data-lang="en" data-date="2024" data-title="Surviving the Sea of Homogeneity">
+        <h3>Surviving the Sea of Homogeneity</h3>
+        <div class="work-status">Richter Scholar · Okinawa, Hokkaido, Hawaii</div>
+        <p class="excerpt">Ryukyuan and Ainu cultural preservation — fieldwork and reflection on the edges of Japan.</p>
+        <div class="work-foot"><a href="https://akseaa21.wixsite.com/richterproject" target="_blank" rel="noopener" style="color:inherit;">Interactive gallery ↗</a></div>
+      </article>
+
+      <article class="work" data-cat="academic" data-lang="en" data-date="" data-title="Lighthouse Reef Atoll">
+        <h3>Lighthouse Reef Atoll</h3>
+        <div class="work-status">ENV 391 individual study · in progress</div>
+        <p class="excerpt">Where the science and the writing meet — conservation prose grounded in the Belize fieldwork. <span style="color:var(--amber); font-style:italic;">Littoral truth.</span></p>
+        <div class="work-foot">Coming →</div>
+      </article>
+
+    </div>
+
+    <div class="lib-note" data-reveal="up">A better flow than the old dropdowns: one shelf, filtered by kind. As pieces are ready, each card can open into its own reading page — clean type, no clutter. Tell me which works to bring forward first.</div>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <div class="foot-brand">Weaver's <span class="comma">Demise</span></div>
+      <div class="foot-tag">the literary side of Avelina, per sea</div>
+    </div>
+    <nav class="foot-nav">
+      <a href="index.html">← Per Sea</a>
+      <a href="#poetry-anchor">Poetry</a>
+      <a href="#prose-anchor">Prose</a>
+      <a href="#academic-anchor">Academic</a>
+      <a href="gallery.html">Gallery</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script>
+(function () {
+  var tabs = document.querySelectorAll('#tabs .tab');
+  var grid = document.getElementById('libGrid');
+  var works = Array.prototype.slice.call(document.querySelectorAll('#libGrid .work'));
+  var sortSel = document.getElementById('sortSel');
+  var vts = document.querySelectorAll('.vt');
+  var activeFilter = 'all';
+  var originalOrder = works.slice();
+
+  // stamp a visible date badge where a written-date exists
+  works.forEach(function (w) {
+    var d = w.getAttribute('data-date');
+    if (d) {
+      var badges = w.querySelector('.work-badges');
+      if (badges && !badges.querySelector('.date-badge')) {
+        var span = document.createElement('span');
+        span.className = 'date-badge';
+        span.textContent = d;
+        badges.appendChild(span);
+      }
+    }
+  });
+
+  var LANG_ORDER = { en: 0, ru: 1, ja: 2, mixed: 3 };
+  function langKey(w) { var l = w.getAttribute('data-lang') || 'mixed'; return (LANG_ORDER[l] != null ? LANG_ORDER[l] : 9) + l; }
+  function titleKey(w) { return (w.getAttribute('data-title') || '').toLowerCase(); }
+  function dateVal(w) { var d = w.getAttribute('data-date'); return d ? parseInt(d.slice(0, 4), 10) : null; }
+
+  function applySort(mode) {
+    var arr = works.slice();
+    if (mode === 'featured') {
+      arr = originalOrder.slice();
+    } else if (mode === 'title') {
+      arr.sort(function (a, b) { return titleKey(a).localeCompare(titleKey(b), undefined, { numeric: true }); });
+    } else if (mode === 'title-desc') {
+      arr.sort(function (a, b) { return titleKey(b).localeCompare(titleKey(a), undefined, { numeric: true }); });
+    } else if (mode === 'date-new' || mode === 'date-old') {
+      arr.sort(function (a, b) {
+        var da = dateVal(a), db = dateVal(b);
+        if (da == null && db == null) return titleKey(a).localeCompare(titleKey(b));
+        if (da == null) return 1;   // undated pieces sink to the bottom
+        if (db == null) return -1;
+        return mode === 'date-new' ? db - da : da - db;
+      });
+    } else if (mode === 'lang') {
+      arr.sort(function (a, b) {
+        var c = langKey(a).localeCompare(langKey(b));
+        return c !== 0 ? c : titleKey(a).localeCompare(titleKey(b));
+      });
+    }
+    arr.forEach(function (w) { grid.appendChild(w); });
+  }
+
+  function applyFilter() {
+    works.forEach(function (w) {
+      var show = (activeFilter === 'all' || w.getAttribute('data-cat') === activeFilter);
+      w.style.display = show ? '' : 'none';
+    });
+  }
+
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (x) { x.classList.remove('active'); });
+      t.classList.add('active');
+      activeFilter = t.getAttribute('data-filter');
+      applyFilter();
+    });
+  });
+
+  if (sortSel) sortSel.addEventListener('change', function () { applySort(sortSel.value); applyFilter(); });
+
+  vts.forEach(function (b) {
+    b.addEventListener('click', function () {
+      vts.forEach(function (x) { x.classList.remove('active'); });
+      b.classList.add('active');
+      grid.classList.toggle('list', b.getAttribute('data-view') === 'list');
+    });
+  });
+})();
+</script>
+</body>
+</html>

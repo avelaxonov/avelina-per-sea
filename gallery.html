@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery — Avelina, per sea</title>
+<meta name="description" content="Underwater and field photography by Avelina Axonov. Per sea." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
+<style>
+.g-hero { padding-top: 120px; }
+.g-hero .wrap { padding-bottom: 2rem; }
+.g-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.6rem, 7vw, 5rem); letter-spacing: -0.03em; color: var(--text-light); line-height: 0.98; margin: 1rem 0 0.8rem; }
+.g-intro { max-width: 52ch; color: var(--pale); font-size: 1.05rem; }
+.g-group-title { font-family: var(--font-display); font-size: clamp(1.4rem,3vw,2rem); color: var(--text-light); margin-bottom: 0.4rem; }
+.g-group-sub { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--aqua); margin-bottom: 2rem; }
+.masonry { column-count: 3; column-gap: 1rem; }
+.masonry .imgframe { break-inside: avoid; margin-bottom: 1rem; border-radius: 4px; cursor: pointer; position: relative; }
+.masonry .imgframe img { transition: transform 0.5s var(--ease-out); width: 100%; }
+.masonry .imgframe:hover img { transform: scale(1.04); }
+.masonry .imgframe::after { content: "⤢"; position: absolute; top: 0.7rem; right: 0.7rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; background: rgba(13,43,46,0.6); border: 1px solid var(--pale-dim); border-radius: 50%; color: var(--text-light); opacity: 0; transition: opacity 0.25s; font-size: 0.9rem; }
+.masonry .imgframe:hover::after { opacity: 1; }
+.masonry .photo-ph { break-inside: avoid; margin-bottom: 1rem; border-radius: 4px; aspect-ratio: 3/4; }
+.g-divider { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+.g-divider hr { border: none; border-top: 1px solid var(--pale-dim); }
+@media (max-width: 880px) { .masonry { column-count: 2; } }
+@media (max-width: 520px) { .masonry { column-count: 1; } }
+</style>
+</head>
+<body>
+
+<nav class="nav scrolled">
+  <a href="index.html" class="nav-logo"><span class="dot"></span>Avelina<span class="comma">,</span>&nbsp;per sea</a>
+  <div class="nav-links">
+    <a href="index.html">← Per Sea</a>
+    <a href="index.html#research">Research</a>
+    <a href="index.html#fieldwork">Field</a>
+    <a href="writer.html">Writing</a>
+    <a href="index.html#contact" class="cv">Contact</a>
+  </div>
+  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<header class="g-hero bg-dark">
+  <div class="wrap">
+    <div data-reveal="up"><a href="index.html" class="backlink">← back to per sea</a></div>
+    <div class="eyebrow" data-reveal="up" style="margin-top:1.5rem;">Gallery</div>
+    <h1 class="g-title" data-reveal="up" data-delay="80">Seen, per sea.</h1>
+    <p class="g-intro" data-reveal="up" data-delay="140">Underwater and field photography — much of it shot on the same reef where the housings are tested. Click any frame to open it full-size.</p>
+  </div>
+</header>
+
+<!-- FROM THE FIELD -->
+<section class="bg-dark" style="padding-top:1rem;">
+  <div class="wrap" style="padding-top:2rem;">
+    <h2 class="g-group-title" data-reveal="up">From the Field</h2>
+    <div class="g-group-sub" data-reveal="up">Lighthouse Reef Atoll, Belize · static-camera deployment</div>
+    <div class="masonry" data-reveal="fade">
+      <div class="imgframe" data-lightbox="assets/img/hero-parrotfish.jpg" data-caption="Rainbow parrotfish at the surface"><img src="assets/img/hero-parrotfish.jpg" alt="Two parrotfish" /></div>
+      <div class="imgframe" data-lightbox="assets/img/reef-faces.jpg" data-caption="The school crowds the lens"><img src="assets/img/reef-faces.jpg" alt="Reef fish close to camera" /></div>
+      <div class="imgframe" data-lightbox="assets/img/diver-v.jpg" data-caption="Descending with the camera rig"><img src="assets/img/diver-v.jpg" alt="Diver descending" /></div>
+      <div class="imgframe" data-lightbox="assets/img/reef-04.jpg" data-caption="Yellowtail snappers under the surface"><img src="assets/img/reef-04.jpg" alt="Snappers" /></div>
+      <div class="imgframe" data-lightbox="assets/img/reef-06.jpg" data-caption="Great barracuda over the transect"><img src="assets/img/reef-06.jpg" alt="Barracuda" /></div>
+      <div class="imgframe" data-lightbox="assets/img/reef-wide.jpg" data-caption="Schoolmaster snapper · housing markers in frame"><img src="assets/img/reef-wide.jpg" alt="Reef wide" /></div>
+      <div class="imgframe" data-lightbox="assets/img/reef-07.jpg" data-caption="Porcupinefish on the seafloor"><img src="assets/img/reef-07.jpg" alt="Porcupinefish" /></div>
+      <div class="imgframe" data-lightbox="assets/img/reef-05.jpg" data-caption="Snappers and surgeonfish over coral"><img src="assets/img/reef-05.jpg" alt="Mixed school" /></div>
+      <div class="imgframe" data-lightbox="assets/img/reef-08.jpg" data-caption="Schoolmaster snappers near the rig"><img src="assets/img/reef-08.jpg" alt="Snappers" /></div>
+      <div class="imgframe" data-lightbox="assets/img/diver-h.jpg" data-caption="Working the rig at depth"><img src="assets/img/diver-h.jpg" alt="Diver horizontal" /></div>
+      <div class="imgframe" data-lightbox="assets/img/beach-selfie.jpg" data-caption="Surface interval · Lighthouse Reef"><img src="assets/img/beach-selfie.jpg" alt="Beach selfie" /></div>
+    </div>
+  </div>
+</section>
+
+<div class="g-divider"><hr /></div>
+
+<!-- PERSONAL -->
+<section class="bg-dark">
+  <div class="wrap">
+    <h2 class="g-group-title" data-reveal="up">Personal &amp; Artistic</h2>
+    <div class="g-group-sub" data-reveal="up">Curated · distinct from the fieldwork record · 6–10 images</div>
+    <div class="masonry" data-reveal="fade">
+      <div class="photo-ph" style="aspect-ratio:3/4;"><span class="ph-label">[ USER WILL PROVIDE ] artistic photo</span></div>
+      <div class="photo-ph" style="aspect-ratio:1;"><span class="ph-label">[ PHOTO ]</span></div>
+      <div class="photo-ph" style="aspect-ratio:4/5;"><span class="ph-label">[ PHOTO ]</span></div>
+      <div class="photo-ph" style="aspect-ratio:3/4;"><span class="ph-label">[ PHOTO ]</span></div>
+      <div class="photo-ph" style="aspect-ratio:1;"><span class="ph-label">[ PHOTO ]</span></div>
+      <div class="photo-ph" style="aspect-ratio:4/5;"><span class="ph-label">[ PHOTO ]</span></div>
+    </div>
+    <div class="lib-note" style="margin-top:2.5rem; font-family:var(--font-mono); font-size:0.78rem; color:var(--pale); font-style:italic; padding:1.2rem 1.5rem; border-left:2px solid var(--aqua); background:rgba(107,191,190,0.04);" data-reveal="up">Drop your artistic photos in and I'll place them — this grid auto-flows and every image opens in the lightbox. No captions needed unless you want them.</div>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <div class="foot-brand">Avelina<span class="comma">,</span> per sea</div>
+      <div class="foot-tag">Going deep.</div>
+    </div>
+    <nav class="foot-nav">
+      <a href="index.html">← Per Sea</a>
+      <a href="index.html#fieldwork">Fieldwork</a>
+      <a href="writer.html">Writing</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>
