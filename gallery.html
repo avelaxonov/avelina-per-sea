@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery — Avelina, per sea</title>
+<link rel="icon" type="image/png" href="assets/logo.png" />
+<link rel="apple-touch-icon" href="assets/logo.png" />
+<meta name="description" content="Underwater and field photography by Avelina Axonov. Per sea." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
+<style>
+.g-hero { padding-top: 120px; }
+.g-hero .wrap { padding-bottom: 2rem; }
+.g-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.6rem, 7vw, 5rem); letter-spacing: -0.03em; color: var(--text-light); line-height: 0.98; margin: 1rem 0 0.8rem; }
+.g-intro { max-width: 52ch; color: var(--pale); font-size: 1.05rem; }
+.g-group-title { font-family: var(--font-display); font-size: clamp(1.4rem,3vw,2rem); color: var(--text-light); margin-bottom: 0.4rem; }
+.g-group-sub { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--aqua); margin-bottom: 2rem; }
+.per-sea-tag { font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 0.46em; color: var(--aqua); margin-left: 0.7rem; vertical-align: middle; opacity: 0.9; letter-spacing: 0; text-transform: none; }
+.g-intro em { color: var(--aqua); font-style: italic; }
+.masonry { column-count: 3; column-gap: 1rem; }
+.masonry .imgframe { break-inside: avoid; margin-bottom: 1rem; border-radius: 4px; cursor: pointer; position: relative; }
+.masonry .imgframe img { transition: transform 0.5s var(--ease-out); width: 100%; }
+.masonry .imgframe:hover img { transform: scale(1.04); }
+.masonry .imgframe::after { content: "⤢"; position: absolute; top: 0.7rem; right: 0.7rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; background: rgba(13,43,46,0.6); border: 1px solid var(--pale-dim); border-radius: 50%; color: var(--text-light); opacity: 0; transition: opacity 0.25s; font-size: 0.9rem; }
+.masonry .imgframe:hover::after { opacity: 1; }
+.masonry .photo-ph { break-inside: avoid; margin-bottom: 1rem; border-radius: 4px; aspect-ratio: 3/4; }
+.etudes-note { max-width: 60ch; }
+.etudes-note p { color: var(--pale); font-size: 1.05rem; margin-bottom: 1.6rem; }
+.etudes-note p em { color: var(--aqua); font-style: italic; }
+.etudes-note p b { color: var(--text-light); font-weight: 600; }
+.g-divider { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+.g-divider hr { border: none; border-top: 1px solid var(--pale-dim); }
+@media (max-width: 880px) { .masonry { column-count: 2; } }
+@media (max-width: 520px) { .masonry { column-count: 1; } }
+</style>
+</head>
+<body>
+
+<nav class="nav scrolled">
+  <a href="index.html" class="nav-logo"><span class="dot"></span>Avelina<span class="comma">,</span>&nbsp;per <span class="suffix" id="brandSuffix" title="click me">scene</span></a>
+  <div class="nav-links">
+    <a href="index.html">← Per Sea</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#research">Research</a>
+    <a href="index.html#gallery">Gallery</a>
+    <a href="index.html#writing">Writing</a>
+    <a href="index.html#contact" class="cv">Contact</a>
+  </div>
+  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<header class="g-hero bg-dark">
+  <div class="wrap">
+    <div data-reveal="up"><a href="index.html" class="backlink">← back to per sea</a></div>
+    <div class="eyebrow" data-reveal="up" style="margin-top:1.5rem;">Gallery</div>
+    <h1 class="g-title" data-reveal="up" data-delay="80">Seen, per scene.</h1>
+    <p class="g-intro" data-reveal="up" data-delay="140">Three ways of looking — the marine field record, <em>per sea</em>; life in the in-between; and the artistic frame. Click any image to open it full-size.</p>
+  </div>
+</header>
+
+<!-- FROM THE FIELD -->
+<section class="bg-dark" style="padding-top:1rem;">
+  <div class="wrap" style="padding-top:2rem;">
+    <h2 class="g-group-title" data-reveal="up">From the Field <span class="per-sea-tag">per sea</span></h2>
+    <div class="g-group-sub" data-reveal="up">Lighthouse Reef Atoll, Belize · static-camera deployment</div>
+    <div class="masonry" data-reveal="fade">
+      <div class="imgframe" data-lightbox="assets/img/hero-parrotfish.jpg" data-caption="Rainbow parrotfish at the surface"><img src="assets/img/hero-parrotfish.jpg" alt="Two parrotfish" /></div>
+      <div class="imgframe" data-lightbox="assets/img/reef-faces.jpg" data-caption="The school crowds the lens"><img src="assets/img/reef-faces.jpg" alt="Reef fish close to camera" /></div>
+      <div class="imgframe" data-lightbox="assets/img/diver-v.jpg" data-caption="Descending with the camera rig"><img src="assets/img/diver-v.jpg" alt="Diver descending" /></div>
+      <div class="imgframe" data-lightbox="assets/img/reef-04.jpg" data-caption="Yellowtail snappers under the surface"><img src="assets/img/reef-04.jpg" alt="Snappers" /></div>
+      <div class="imgframe" data-lightbox="assets/img/reef-06.jpg" data-caption="Great barracuda over the transect"><img src="assets/img/reef-06.jpg" alt="Barracuda" /></div>
+      <div class="imgframe" data-lightbox="assets/img/reef-wide.jpg" data-caption="Schoolmaster snapper · housing markers in frame"><img src="assets/img/reef-wide.jpg" alt="Reef wide" /></div>
+      <div class="imgframe" data-lightbox="assets/img/reef-07.jpg" data-caption="Porcupinefish on the seafloor"><img src="assets/img/reef-07.jpg" alt="Porcupinefish" /></div>
+      <div class="imgframe" data-lightbox="assets/img/reef-05.jpg" data-caption="Snappers and surgeonfish over coral"><img src="assets/img/reef-05.jpg" alt="Mixed school" /></div>
+      <div class="imgframe" data-lightbox="assets/img/reef-08.jpg" data-caption="Schoolmaster snappers near the rig"><img src="assets/img/reef-08.jpg" alt="Snappers" /></div>
+      <div class="imgframe" data-lightbox="assets/img/diver-h.jpg" data-caption="Working the rig at depth"><img src="assets/img/diver-h.jpg" alt="Diver horizontal" /></div>
+      <div class="imgframe" data-lightbox="assets/img/beach-selfie.jpg" data-caption="Surface interval · Lighthouse Reef"><img src="assets/img/beach-selfie.jpg" alt="Beach selfie" /></div>
+    </div>
+  </div>
+</section>
+
+<div class="g-divider"><hr /></div>
+
+<!-- PERSONAL -->
+<section class="bg-dark">
+  <div class="wrap">
+    <h2 class="g-group-title" data-reveal="up">Personal</h2>
+    <div class="g-group-sub" data-reveal="up">Travel, portrait &amp; the in-between — life outside the field</div>
+    <div class="masonry" data-reveal="fade">
+      <div class="imgframe" data-lightbox="assets/img/me/kimono-torii.jpg" data-caption="Kimono at the torii gate · Japan"><img src="assets/img/me/kimono-torii.jpg" alt="In kimono at a vermilion torii gate, Japan" /></div>
+      <div class="imgframe" data-lightbox="assets/img/me/portrait.jpg" data-caption="Self-portrait"><img src="assets/img/me/portrait.jpg" alt="Portrait" /></div>
+      <div class="imgframe" data-lightbox="assets/img/me/parasol-lake.jpg" data-caption="By the water, red parasol · Japan"><img src="assets/img/me/parasol-lake.jpg" alt="In kimono with a red parasol by a lake" /></div>
+      <div class="imgframe" data-lightbox="assets/img/me/blossom.jpg" data-caption="Under the cherry blossoms"><img src="assets/img/me/blossom.jpg" alt="Among cherry blossoms" /></div>
+      <div class="imgframe" data-lightbox="assets/img/me/field-1.jpg" data-caption="Dusk in the field"><img src="assets/img/me/field-1.jpg" alt="Portrait in a red dress in a field at dusk" /></div>
+      <div class="imgframe" data-lightbox="assets/img/me/autumn-pagoda.jpg" data-caption="Autumn, by the five-storey pagoda"><img src="assets/img/me/autumn-pagoda.jpg" alt="Autumn foliage by a pagoda" /></div>
+      <div class="imgframe" data-lightbox="assets/img/me/fuji.jpg" data-caption="Fuji on a clear morning"><img src="assets/img/me/fuji.jpg" alt="Mount Fuji on a clear day" /></div>
+      <div class="imgframe" data-lightbox="assets/img/me/noir-hat.jpg" data-caption="Golden hour"><img src="assets/img/me/noir-hat.jpg" alt="Golden-hour portrait with a hat" /></div>
+      <div class="imgframe" data-lightbox="assets/img/me/field-2.jpg" data-caption="Looking up, last light"><img src="assets/img/me/field-2.jpg" alt="Portrait looking upward at dusk" /></div>
+      <div class="imgframe" data-lightbox="assets/img/me/ferris-night.jpg" data-caption="City lights"><img src="assets/img/me/ferris-night.jpg" alt="By a ferris wheel at night" /></div>
+      <div class="imgframe" data-lightbox="assets/img/me/autumn-road.jpg" data-caption="The long way home"><img src="assets/img/me/autumn-road.jpg" alt="On an autumn road" /></div>
+      <div class="imgframe" data-lightbox="assets/img/me/overlook.jpg" data-caption="On the overlook"><img src="assets/img/me/overlook.jpg" alt="At a mountain overlook" /></div>
+    </div>
+    <div class="lib-note" style="margin-top:2.5rem; font-family:var(--font-mono); font-size:0.78rem; color:var(--pale); font-style:italic; padding:1.2rem 1.5rem; border-left:2px solid var(--aqua); background:rgba(107,191,190,0.04);" data-reveal="up">Personal photography — travel, portraits, and the moments in between. Every image opens full-size in the lightbox.</div>
+  </div>
+</section>
+
+<div class="g-divider"><hr /></div>
+
+<!-- ÉTUDES — the artistic instagram -->
+<section class="bg-dark">
+  <div class="wrap">
+    <h2 class="g-group-title" data-reveal="up">Études</h2>
+    <div class="g-group-sub" data-reveal="up">The artistic frame · studies in angle, light &amp; composition · @vel.jour</div>
+    <div class="etudes-note" data-reveal="up" style="margin-bottom:2rem;">
+      <p>Not the sea, and not myself — just the <em>scene.</em> Studies in angle, light, and composition, the frame taken for its own sake — gathered here and as <b>études by avelina</b> on Instagram.</p>
+    </div>
+    <div class="masonry" data-reveal="fade">
+      <div class="imgframe" data-lightbox="assets/img/etudes/poppy-cupola.jpg" data-caption="A poppy against the cupola"><img src="assets/img/etudes/poppy-cupola.jpg" alt="Red poppy held up against an octagonal stone cupola" loading="lazy" /></div>
+      <div class="imgframe" data-lightbox="assets/img/etudes/stone-gate.jpg" data-caption="The old wooden gate"><img src="assets/img/etudes/stone-gate.jpg" alt="Weathered wooden gate under a stone arch, mountains beyond" loading="lazy" /></div>
+      <div class="imgframe" data-lightbox="assets/img/etudes/monastery-interior.jpg" data-caption="Under the dome"><img src="assets/img/etudes/monastery-interior.jpg" alt="Stone arches and dome of a dim monastery interior" loading="lazy" /></div>
+      <div class="imgframe" data-lightbox="assets/img/etudes/tower-roses.jpg" data-caption="A tower through the roses"><img src="assets/img/etudes/tower-roses.jpg" alt="Church bell tower seen through white roses" loading="lazy" /></div>
+      <div class="imgframe" data-lightbox="assets/img/etudes/dome-cross.jpg" data-caption="Looking up at the drum"><img src="assets/img/etudes/dome-cross.jpg" alt="Ornate church dome and cross against the sky" loading="lazy" /></div>
+      <div class="imgframe" data-lightbox="assets/img/etudes/spire-cypress.jpg" data-caption="A spire between the cypress"><img src="assets/img/etudes/spire-cypress.jpg" alt="Church spire framed between two cypress trees" loading="lazy" /></div>
+      <div class="imgframe" data-lightbox="assets/img/etudes/window-ivy.jpg" data-caption="Window, frame, ivy"><img src="assets/img/etudes/window-ivy.jpg" alt="Window framed by concrete and red railings, ivy creeping in" loading="lazy" /></div>
+      <div class="imgframe" data-lightbox="assets/img/etudes/monument-flag.jpg" data-caption="Stone under the flag"><img src="assets/img/etudes/monument-flag.jpg" alt="Brutalist monument holding a black stone, Georgian flag above" loading="lazy" /></div>
+      <div class="imgframe" data-lightbox="assets/img/etudes/concrete-ivy.jpg" data-caption="Concrete and green"><img src="assets/img/etudes/concrete-ivy.jpg" alt="Concrete beams and pipework overtaken by vines" loading="lazy" /></div>
+    </div>
+    <div style="margin-top:2rem;" data-reveal="up">
+      <a class="btn btn-ghost" href="https://instagram.com/vel.jour" target="_blank" rel="noopener">Follow études — @vel.jour →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-brand-row">
+      <img class="foot-logo" src="assets/logo.png" alt="Avelina, per sea logo" />
+      <div>
+        <div class="foot-brand">Avelina<span class="comma">,</span> per sea</div>
+        <div class="foot-tag">Going deep.</div>
+      </div>
+    </div>
+    <nav class="foot-nav">
+      <a href="index.html">← Per Sea</a>
+      <a href="about.html">About</a>
+      <a href="index.html#fieldwork">Fieldwork</a>
+      <a href="writer.html">Writing</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script>
+/* Easter egg — the gallery is where "per sea" becomes "per ce" becomes "per scene".
+   Click the suffix in the brand to cycle through all three. */
+(function () {
+  var el = document.getElementById('brandSuffix');
+  if (!el) return;
+  var words = ['scene', 'sea', 'ce'];
+  var i = 0;
+  el.style.transition = 'opacity 0.22s var(--ease-out)';
+  el.addEventListener('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    el.style.opacity = '0';
+    setTimeout(function () {
+      i = (i + 1) % words.length;
+      el.textContent = words[i];
+      el.style.opacity = '1';
+    }, 200);
+  });
+})();
+</script>
+</body>
+</html>

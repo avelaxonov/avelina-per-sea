@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Weaver's Cradle — Avelina, per sea</title>
+<meta name="description" content="A poem from Weaver's Cradle — the literary side of Avelina, per sea." />
+<link rel="icon" type="image/png" href="assets/logo.png" />
+<link rel="apple-touch-icon" href="assets/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
+<style>
+body { background: var(--deep-sea); }
+.p-hero { padding-top: 110px; position: relative; overflow: hidden; }
+.p-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(110% 80% at 80% 0%, rgba(196,154,90,0.10), transparent 55%); pointer-events: none; }
+.read { max-width: 720px; margin: 0 auto; padding: 0 var(--gutter); position: relative; z-index: 1; }
+.read-back { margin-bottom: 2.2rem; }
+.poem-kicker { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--amber); }
+.poem-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.04; letter-spacing: -0.02em; color: var(--text-light); margin: 0.8rem 0 0.7rem; text-wrap: balance; }
+.poem-meta { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.08em; color: var(--pale); display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; }
+.poem-meta .sep { color: var(--amber); opacity: 0.7; }
+
+.poem-rule { max-width: 720px; margin: 1.7rem auto; padding: 0 var(--gutter); }
+.poem-rule .line { height: 1px; background: var(--pale-dim); position: relative; }
+.poem-rule .line::after { content: ""; position: absolute; left: 0; top: -3px; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); opacity: 0.7; }
+
+.poem-body { padding-bottom: 1rem; }
+.poem-body .stanza { font-family: var(--font-serif); font-weight: 400; font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.72; color: #DCE6E4; margin: 0 0 1.4rem; letter-spacing: 0.003em; }
+.poem-body .stanza:last-child { margin-bottom: 0; }
+.poem-body .interject, .poem-also .interject { font-style: italic; color: var(--amber); font-size: 0.9em; opacity: 0.92; }
+.nav-logo .ce { font-style: normal; color: var(--aqua); }
+
+.poem-also { margin-top: 2.2rem; }
+.poem-also-label { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.1rem; padding-top: 1.6rem; border-top: 1px solid var(--pale-dim); }
+.poem-also .stanza { font-family: var(--font-serif); font-size: clamp(0.92rem, 1.5vw, 1rem); color: var(--pale); line-height: 1.72; }
+
+.poem-note { margin-top: 2.8rem; font-family: var(--font-body); font-size: 0.95rem; font-style: italic; color: var(--pale); line-height: 1.7; padding: 1.2rem 1.4rem; border-left: 2px solid var(--amber); background: rgba(196,154,90,0.05); border-radius: 0 4px 4px 0; }
+
+.poem-related { margin-top: 2.4rem; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.poem-related a { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.04em; color: var(--aqua); border: 1px solid var(--aqua-dim); border-radius: 100px; padding: 0.45rem 0.9rem; transition: background 0.2s, border-color 0.2s; }
+.poem-related a:hover { background: rgba(107,191,190,0.1); border-color: var(--aqua); }
+
+.poem-foot { max-width: 720px; margin: 4rem auto 0; padding: 2rem var(--gutter) 0; border-top: 1px solid var(--pale-dim); display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.poem-foot a { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.06em; color: var(--pale); transition: color 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; }
+.poem-foot a:hover { color: var(--amber); }
+.poem-foot .pf-lib { color: var(--amber); }
+
+.poem-missing { text-align: center; padding: 4rem 0; color: var(--pale); font-family: var(--font-mono); }
+</style>
+</head>
+<body>
+
+<nav class="nav scrolled">
+  <a href="writer.html" class="nav-logo" title="Weaver's Cradle"><span class="dot"></span>Avelina<span class="comma">,</span>&nbsp;per <span class="ce">ce</span></a>
+  <div class="nav-links">
+    <a href="index.html">← Per Sea</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#research">Research</a>
+    <a href="index.html#gallery">Gallery</a>
+    <a href="writer.html">Writing</a>
+    <a href="index.html#contact" class="cv">Contact</a>
+  </div>
+  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<header class="p-hero">
+  <div class="read">
+    <div class="read-back"><a href="writer.html" class="backlink">← Weaver's Cradle · the library</a></div>
+    <div class="poem-kicker" id="pKicker">Weaver's Cradle</div>
+    <h1 class="poem-title" id="pTitle">…</h1>
+    <div class="poem-meta" id="pMeta"></div>
+  </div>
+</header>
+
+<div class="poem-rule"><div class="line"></div></div>
+
+<main>
+  <div class="read">
+    <div class="poem-body" id="pBody"></div>
+    <div id="pAlso"></div>
+    <div id="pNote"></div>
+    <div class="poem-related" id="pRelated"></div>
+  </div>
+  <div class="poem-foot" id="pFoot"></div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-brand-row">
+      <img class="foot-logo" src="assets/logo.png" alt="Avelina, per sea logo" />
+      <div>
+        <div class="foot-brand">Weaver's <span class="comma">Cradle</span></div>
+        <div class="foot-tag">the literary side of Avelina, per sea</div>
+      </div>
+    </div>
+    <nav class="foot-nav">
+      <a href="index.html">← Per Sea</a>
+      <a href="writer.html">The Library</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script src="assets/poems.js"></script>
+<script>
+(function () {
+  function qp(name) { return new URLSearchParams(location.search).get(name); }
+  var order = window.POEM_ORDER || [];
+  var slug = qp('p');
+  var p = (window.POEMS && window.POEMS[slug]) || null;
+
+  if (!p) {
+    document.getElementById('pTitle').textContent = 'Poem not found';
+    document.getElementById('pBody').innerHTML = '<p class="poem-missing">This piece isn\u2019t in the library yet. <a href="writer.html" style="color:var(--amber);border-bottom:1px solid var(--amber)">Back to Weaver\u2019s Cradle \u2192</a></p>';
+    return;
+  }
+
+  document.title = p.title + ' — Weaver\u2019s Cradle · Avelina, per sea';
+  document.getElementById('pTitle').textContent = p.title;
+
+  var langName = p.lang === 'ru' ? 'Russian' : (p.lang === 'mixed' ? 'Bilingual' : (p.lang === 'ja' ? 'Japanese' : 'English'));
+  var meta = [];
+  if (p.date) meta.push(p.date);
+  meta.push(langName);
+  if (p.kind) meta.push(p.kind);
+  document.getElementById('pMeta').innerHTML = meta.map(function (m) { return '<span>' + m + '</span>'; }).join('<span class="sep">·</span>');
+
+  document.getElementById('pBody').innerHTML = window.renderPoemText(p.text);
+
+  // additional language versions / variants
+  if (p.also && p.also.length) {
+    document.getElementById('pAlso').innerHTML = p.also.map(function (a) {
+      return '<div class="poem-also"><div class="poem-also-label">' + a.label + '</div>' + window.renderPoemText(a.text) + '</div>';
+    }).join('');
+  }
+
+  if (p.note) {
+    document.getElementById('pNote').innerHTML = '<div class="poem-note">' + p.note + '</div>';
+  }
+
+  if (p.related && p.related.length) {
+    document.getElementById('pRelated').innerHTML = p.related.map(function (r) {
+      return '<a href="poem.html?p=' + r.slug + '">' + r.label + ' →</a>';
+    }).join('');
+  }
+
+  // prev / next within the curated order + back to library
+  var foot = document.getElementById('pFoot');
+  var idx = order.indexOf(slug);
+  var prev = idx > 0 ? order[idx - 1] : null;
+  var next = idx >= 0 && idx < order.length - 1 ? order[idx + 1] : null;
+  var html = '';
+  html += prev ? '<a href="poem.html?p=' + prev + '">← ' + (window.POEMS[prev].title) + '</a>' : '<span></span>';
+  html += '<a href="writer.html" class="pf-lib">The Library</a>';
+  html += next ? '<a href="poem.html?p=' + next + '">' + (window.POEMS[next].title) + ' →</a>' : '<span></span>';
+  foot.innerHTML = html;
+})();
+</script>
+</body>
+</html>

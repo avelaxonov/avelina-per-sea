@@ -1,0 +1,11 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Working materials — not part of the published site
+uploads/
+scraps/
+.thumbnail
