@@ -1,0 +1,47 @@
+/* ============================================================
+   WEAVER'S CRADLE — burgundy register
+   Loaded AFTER site.css and after each page's inline <style>,
+   on the literary pages only (writer / story / poem / essays).
+   Overrides the sea-glass palette with oxblood + antique gold.
+   To revert: remove the <link> to this file from those pages.
+   ============================================================ */
+:root {
+  --deep-sea:    #1E0A11;   /* oxblood-black field (was deep teal) */
+  --deep-sea-2:  #160709;
+  --dark-teal:   #2C1019;   /* mid wine panel */
+  --aqua:        #C25A6E;   /* primary accent → rose-red (was teal)  */
+  --aqua-bright: #DD7E8C;
+  --aqua-dim:    rgba(194, 90, 110, 0.16);
+  --amber:       #CBA46A;   /* secondary highlight → warm antique gold */
+  --text-light:  #F4E7E5;
+  --pale:        #CBA7AE;   /* muted mauve-rose */
+  --pale-dim:    rgba(203, 167, 174, 0.20);
+}
+::selection { background: var(--aqua); color: #1E0A11; }
+
+/* warm the long-form reading text off the cool grey */
+.po-body .stanza,
+.es-body p,
+.es-abstract p,
+.s-body p { color: #EAD9D6; }
+.s-body p.dialogue { color: #F6ECEA; }
+
+/* re-tint the hardcoded teal/amber glows so nothing stays sea-green */
+.w-hero::before {
+  background:
+    radial-gradient(120% 90% at 82% 12%, rgba(203,164,106,0.18), transparent 56%),
+    radial-gradient(80% 70% at 8% 92%, rgba(194,90,110,0.14), transparent 60%) !important;
+}
+.s-hero::before  { background: radial-gradient(110% 70% at 82% 0%, rgba(203,164,106,0.14), transparent 55%) !important; }
+.es-hero::before { background: radial-gradient(110% 75% at 84% 0%, rgba(194,90,110,0.13), transparent 55%) !important; }
+
+.work.feature        { background: linear-gradient(135deg, rgba(203,164,106,0.09), rgba(194,90,110,0.05)) !important; }
+.lib-grid.list .work.feature { background: rgba(194,90,110,0.06) !important; }
+.po-related a:hover  { background: rgba(194,90,110,0.12) !important; }
+.w-meaning           { background: rgba(194,90,110,0.05) !important; }
+
+/* cream illustration / quote plates read a touch warmer on wine */
+.s-plate { box-shadow: 0 26px 60px -28px rgba(0,0,0,0.78) !important; }
+
+/* nav logo accent on the literary pages */
+.nav-logo .ce { color: var(--aqua); }
