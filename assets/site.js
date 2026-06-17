@@ -220,7 +220,9 @@
       if (el.__lbBound) return;
       el.__lbBound = true;
       el.addEventListener('click', function () {
-        lbList = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox]'));
+        // scope prev/next to the nearest album group if one is present, else the whole page
+        var group = el.closest('[data-lb-group]') || document;
+        lbList = Array.prototype.slice.call(group.querySelectorAll('[data-lightbox]'));
         lb.__show(lbList.indexOf(el));
         lb.classList.add('open'); document.body.style.overflow = 'hidden';
       });
@@ -252,5 +254,136 @@
     });
   });
 
+  /* ---------- FOOTER: copyright + discreet "report a problem" (every page) ---------- */
+  (function () {
+    var foot = document.querySelector('.site-foot .wrap');
+    if (!foot || foot.querySelector('.foot-meta')) return;
+    var year = new Date().getFullYear();
+    var bar = document.createElement('div');
+    bar.className = 'foot-meta';
+    bar.innerHTML =
+      '<span class="foot-copy">&copy; ' + year + ' Avelina Axonov. All rights reserved. ' +
+      'Words, images &amp; code are mine \u2014 please ask before reusing.</span>' +
+      '<a class="foot-report" href="mailto:avelaxonov@gmail.com' +
+      '?subject=per%20sea%20%E2%80%94%20something%20looks%20off&body=Page%3A%20' +
+      encodeURIComponent(location.pathname.split('/').pop() || 'index.html') +
+      '%0AWhat%20I%20saw%3A%20">Spot a problem? Tell me \u2192</a>';
+    foot.appendChild(bar);
+  })();
+
+  /* ---------- EASTER EGGS ---------- */
+  // 1) a quiet note for anyone who opens the console
+  try {
+    console.log('%c  per sea  ', 'background:#0D2B2E;color:#6BBFBE;font:600 14px/1.8 monospace;padding:2px 6px;');
+    console.log('%cReef-search, per sea. If you are reading this, you went deep enough to find the console. Hello. \uD83D\uDC19', 'color:#C49A5A;font:italic 12px/1.6 serif;');
+  } catch (e) {}
+
+  // 2) a WATER RIPPLE — concentric rings spreading from a point, the way a drop
+  //    lands on a still surface: a quick splash, then rings released one after
+  //    another and softened with a faint glow. Event-driven and self-removing
+  //    (it animates only transform/opacity), so it's idle-free and can't lag the
+  //    page or break it.
+  function pageRipple(x, y, opts) {
+    opts = opts || {};
+    if (reduce) return;
+    var accent = getComputedStyle(document.documentElement).getPropertyValue('--aqua').trim() || '#6BBFBE';
+    var R = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) * 1.08;
+    var rings = opts.rings || 4;
+    var layer = document.createElement('div');
+    layer.setAttribute('style', 'position:fixed;inset:0;z-index:9998;pointer-events:none;overflow:hidden;');
+    // the splash where the drop lands
+    var splash = document.createElement('div');
+    splash.setAttribute('style', 'position:absolute;left:' + x + 'px;top:' + y + 'px;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:radial-gradient(circle,' + accent + '99,' + accent + '11 58%,transparent 72%);will-change:transform,opacity;');
+    layer.appendChild(splash);
+    splash.animate([{ transform: 'scale(0.4)', opacity: 0.85 }, { transform: 'scale(8)', opacity: 0 }], { duration: 680, easing: 'ease-out', fill: 'forwards' });
+    // concentric wavefronts, each released a beat after the last
+    for (var i = 0; i < rings; i++) {
+      var seed = 28;
+      var ring = document.createElement('div');
+      ring.setAttribute('style', 'position:absolute;left:' + x + 'px;top:' + y + 'px;width:' + seed + 'px;height:' + seed + 'px;margin:' + (-seed / 2) + 'px 0 0 ' + (-seed / 2) + 'px;border-radius:50%;border:1.5px solid ' + accent + ';box-shadow:0 0 13px ' + accent + '55, inset 0 0 9px ' + accent + '2e;opacity:0.5;filter:blur(0.3px);will-change:transform,opacity;');
+      layer.appendChild(ring);
+      ring.animate(
+        [{ transform: 'scale(0.3)', opacity: 0.6 }, { offset: 0.12, opacity: 0.5 }, { transform: 'scale(' + ((R * 2) / seed) + ')', opacity: 0 }],
+        { duration: 1750, delay: i * 240, easing: 'cubic-bezier(0.16,0.75,0.3,1)', fill: 'forwards' }
+      );
+    }
+    document.body.appendChild(layer);
+    setTimeout(function () { layer.remove(); }, 1750 + rings * 240 + 300);
+  }
+  window.__perSeaRipple = pageRipple;
+
+  // ---------- shared sound module (sfx toggle persists; used by ripple + game) ----------
+  var SND = (function () {
+    var on = true; try { on = localStorage.getItem('perSea.snd') !== '0'; } catch (e) {}
+    var cache = {};
+    function get(k) { if (!cache[k]) { var a = new Audio('assets/sfx/' + k + '.mp3'); a.preload = 'auto'; a.volume = (k === 'ripple') ? 0.3 : 0.4; cache[k] = a; } return cache[k]; }
+    return {
+      isOn: function () { return on; },
+      set: function (v) { on = !!v; try { localStorage.setItem('perSea.snd', on ? '1' : '0'); } catch (e) {} },
+      toggle: function () { this.set(!on); return on; },
+      play: function (k) { if (!on) return; try { var b = get(k); var a = b.cloneNode(); a.volume = b.volume; a.play().catch(function () {}); } catch (e) {} }
+    };
+  })();
+  window.__perSeaSound = SND;
+  window.__perSeaPlaySfx = function (k) { SND.play(k); };
+
+  // 3) DISCOVERABLE TRIGGERS (and they all work on mobile):
+  //    • tap the little dot in the logo            → a ripple from the dot
+  //    • tap a [data-tug] title (e.g. the writing
+  //      page's "Weaver's Cradle")                  → ripple + the title shivers
+  (function () {
+    var dot = document.querySelector('.nav-logo .dot');
+    if (dot) {
+      dot.style.cursor = 'pointer';
+      dot.setAttribute('title', 'drop a stone');
+      dot.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();   // ripple instead of navigating home
+        var r = dot.getBoundingClientRect();
+        pageRipple(r.left + r.width / 2, r.top + r.height / 2, { rings: 4 });
+        SND.play('ripple');
+      });
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-tug]'), function (el) {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function () {
+        var r = el.getBoundingClientRect();
+        pageRipple(r.left + r.width / 2, r.top + r.height / 2, { rings: 4 });
+        el.classList.remove('tugged'); void el.offsetWidth; el.classList.add('tugged');
+        setTimeout(function () { el.classList.remove('tugged'); }, 1300);
+      });
+    });
+  })();
+
   document.body.classList.add('loaded');
+
+  /* ---------- FOOTNOTE TOOLTIPS (essay pages; no-op elsewhere) ---------- */
+  (function () {
+    var fns = document.querySelectorAll('.fn[data-fn]');
+    if (!fns.length) return;
+    var tip = document.createElement('div'); tip.className = 'fn-tip'; document.body.appendChild(tip);
+    var hideT;
+    function show(el) {
+      var n = el.getAttribute('data-fn');
+      var note = document.getElementById('fn-' + n + '-note');
+      if (!note) return;
+      clearTimeout(hideT);
+      tip.innerHTML = note.innerHTML.replace(/^<span class="fn-bk">[\s\S]*?<\/span>\s*/, '');
+      tip.classList.add('show');
+      var r = el.getBoundingClientRect(), tw = tip.offsetWidth, th = tip.offsetHeight;
+      var x = Math.min(Math.max(8, r.left + r.width / 2 - tw / 2), window.innerWidth - tw - 8);
+      var y = r.bottom + 8; if (y + th > window.innerHeight - 8) y = r.top - th - 8;
+      tip.style.left = x + 'px'; tip.style.top = Math.max(8, y) + 'px';
+    }
+    function hide() { hideT = setTimeout(function () { tip.classList.remove('show'); }, 90); }
+    Array.prototype.forEach.call(fns, function (el) {
+      el.addEventListener('mouseenter', function () { show(el); });
+      el.addEventListener('mouseleave', hide);
+      el.addEventListener('focus', function () { show(el); });
+      el.addEventListener('blur', hide);
+      el.addEventListener('click', function (e) { e.preventDefault(); show(el); });
+    });
+    tip.addEventListener('mouseenter', function () { clearTimeout(hideT); });
+    tip.addEventListener('mouseleave', hide);
+    window.addEventListener('scroll', function () { tip.classList.remove('show'); }, { passive: true });
+  })();
 })();

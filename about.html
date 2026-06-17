@@ -26,9 +26,17 @@
 /* INTRO narrative */
 .a-intro p { font-size: 1.1rem; color: var(--text-light); opacity: 0.9; max-width: 64ch; margin-bottom: 1.3rem; }
 .a-intro p .placeholder-text { color: var(--amber); }
-.a-quick { display: flex; flex-wrap: wrap; gap: 0.5rem 0.5rem; margin-top: 2rem; }
-.a-fact { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.04em; color: var(--pale); border: 1px solid var(--pale-dim); border-radius: 100px; padding: 0.45rem 0.9rem; }
-.a-fact b { color: var(--aqua); font-weight: 500; }
+.a-quick { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+.a-fact { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.04em; color: var(--text-dark); background: rgba(45,107,106,0.07); border: 1px solid rgba(45,107,106,0.28); border-radius: 100px; padding: 0.5rem 0.95rem; }
+.a-fact b { color: #2d6b6a; font-weight: 600; }
+
+/* IN THE PRESS */
+.a-press { margin-top: 1.5rem; display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; background: rgba(45,107,106,0.06); border: 1px solid rgba(45,107,106,0.22); border-left: 3px solid #2d6b6a; border-radius: 8px; padding: 0.85rem 1.15rem; }
+.a-press-label { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: #2d6b6a; white-space: nowrap; }
+.a-press-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.96rem; color: var(--text-dark); border-bottom: 1px solid rgba(45,107,106,0.4); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }or 0.2s, border-color 0.2s; }
+.a-press-link i { font-style: italic; }
+.a-press-link .a-press-arrow { font-family: var(--font-mono); font-size: 0.8rem; color: #2d6b6a; }
+.a-press-link:hover { color: #2d6b6a; border-color: #2d6b6a; }
 
 /* TIMELINE */
 .tl-head { text-align: center; max-width: 40ch; margin: 0 auto; }
@@ -79,6 +87,55 @@
   .beyond-grid { grid-template-columns: 1fr; }
   .a-strip { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ABOUT — story / timeline, centered, with a ripple-crossfade */
+.about-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem 1.5rem; max-width: 760px; margin: 0 auto; width: 100%; }
+.flip-btn { display: inline-flex; align-items: center; gap: 0.55rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dark); background: transparent; border: 1px solid rgba(28,38,37,0.22); border-radius: 100px; padding: 0.6rem 1.1rem; cursor: pointer; transition: border-color 0.25s, color 0.25s, background 0.25s; -webkit-tap-highlight-color: transparent; }
+.flip-btn:hover { border-color: #2d6b6a; color: #2d6b6a; background: rgba(45,107,106,0.06); }
+.flip-btn .fb-ico { font-size: 0.95rem; transition: transform 0.7s var(--ease-out); }
+.flip-btn.spun .fb-ico { transform: rotate(360deg); }
+
+.flip-stage { margin: 2.2rem auto 0; max-width: 760px; position: relative; }
+.flip-panel { transition: opacity 0.42s ease; }
+.flip-panel[hidden] { display: none; }
+.flip-panel.fading { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .flip-panel { transition: opacity 0.2s; } }
+
+/* the dry log — a clean teal descent */
+.drylog { position: relative; }
+.drylog-head { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: #2d6b6a; margin-bottom: 1.5rem; text-align: center; }
+.drylog ol { list-style: none; position: relative; padding: 0 0 0 1.7rem; margin: 0; }
+.drylog ol::before { content: ""; position: absolute; left: 4px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(to bottom, rgba(45,107,106,0.18), #2d6b6a 55%, rgba(45,107,106,0.45)); border-radius: 2px; transform-origin: top; }
+/* dark, both-sides, scroll-animated timeline */
+#aboutSec { transition: background 0.55s ease; }
+#aboutSec.tl-mode { background: var(--deep-sea); }
+#aboutSec.tl-mode .eyebrow { color: var(--aqua); }
+#aboutSec.tl-mode .flip-btn { color: #cfe6e6; border-color: rgba(255,255,255,0.28); }
+#aboutSec.tl-mode .flip-btn:hover { color: #fff; border-color: var(--aqua); background: rgba(107,191,190,0.1); }
+#tlPanel { background: transparent; box-shadow: none; border-radius: 0; padding: 1.4rem 0 0.4rem; }
+.tl2 { position: relative; max-width: 720px; margin: 0 auto; }
+.tl2::before { content: ""; position: absolute; left: 50%; top: 4px; bottom: 4px; width: 2px; transform: translateX(-50%); background: linear-gradient(to bottom, rgba(107,191,190,0.15), #6BBFBE 50%, rgba(107,191,190,0.3)); border-radius: 2px; }
+.tl2-item { position: relative; width: 50%; box-sizing: border-box; padding: 0 2.2rem; margin: 1.15rem 0; }
+.tl2-item.left { left: 0; text-align: right; }
+.tl2-item.right { left: 50%; text-align: left; }
+.tl2-node { position: absolute; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--deep-sea); border: 2px solid #6BBFBE; box-sizing: border-box; z-index: 2; transition: background 0.2s, box-shadow 0.2s; }
+.tl2-item.left .tl2-node { right: -6px; }
+.tl2-item.right .tl2-node { left: -6px; }
+.tl2-item.open .tl2-node { background: var(--aqua); box-shadow: 0 0 10px rgba(107,191,190,0.6); }
+.tl2-year { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.04em; color: var(--aqua); }
+.tl2-place { font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; color: var(--text-light); margin-top: 0.15rem; line-height: 1.2; cursor: pointer; display: inline-flex; align-items: baseline; gap: 0.45rem; -webkit-tap-highlight-color: transparent; }
+.tl2-place:hover { color: var(--aqua); }
+.tl2-plus { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 400; color: var(--aqua); opacity: 0.55; transition: transform 0.3s; }
+.tl2-item.open .tl2-plus { transform: rotate(45deg); opacity: 0.9; }
+.tl2-detail { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease; }
+.tl2-item.open .tl2-detail { max-height: 160px; opacity: 1; margin-top: 0.4rem; }
+.tl2-detail p { font-size: 0.88rem; color: var(--pale); line-height: 1.55; margin: 0; text-wrap: pretty; }
+@media (max-width: 620px) {
+  .tl2::before { left: 8px; }
+  .tl2-item, .tl2-item.left, .tl2-item.right { width: 100%; left: 0; text-align: left; padding: 0 0 0 2.1rem; margin: 0.95rem 0; }
+  .tl2-item.left .tl2-node, .tl2-item.right .tl2-node { left: 1px; right: auto; }
+  .tl2-place { justify-content: flex-start; }
+}
 </style>
 </head>
 <body>
@@ -105,25 +162,60 @@
       <h1 class="a-title" data-reveal="up" data-delay="80">The long way <em>to the sea.</em></h1>
       <p class="a-lede" data-reveal="up" data-delay="140">From a port city on the Black Sea to a reef in the Caribbean — by way of engineering benches, language classrooms, and a lot of saltwater. This is the <em>per sea</em> story.</p>
     </div>
-    <div class="imgframe a-portrait" data-reveal="zoom" data-delay="120"><img src="assets/img/headshot-soft.jpg" alt="Portrait of Avelina Axonov" style="object-position:center 20%;" /></div>
+    <div class="imgframe a-portrait" data-reveal="zoom" data-delay="120"><img loading="eager" fetchpriority="high" decoding="async" src="assets/img/headshot-soft.jpg" alt="Portrait of Avelina Axonov" style="object-position:center 20%;" /></div>
   </div>
 </header>
 
 <div class="transect" data-transect data-label="transect 01"></div>
 
-<!-- INTRO -->
-<section class="bg-light">
+<!-- ABOUT — story / timeline toggle -->
+<section class="bg-light" id="aboutSec">
   <div class="wrap">
-    <div class="eyebrow" data-reveal="up">In short</div>
-    <div class="a-intro" style="margin-top:2rem;">
-      <p data-reveal="up" style="color:var(--text-dark);">I was born in <b style="color:#234a48;">Novorossiysk, Russia</b>, a working port on the Black Sea — which is, fittingly, where my relationship with the water began. <span class="placeholder-text">[Owner to add: a sentence or two about childhood there — what the sea meant to you growing up.]</span></p>
-      <p data-reveal="up" style="color:var(--text-dark);">In high school I moved to the United States, learned to live between two languages, and eventually found my way to Wake Forest University — where engineering, marine biology, and Japanese somehow became one degree path. <span class="placeholder-text">[Owner to add: the personal throughline — why these fields, in your own voice.]</span></p>
+    <div class="about-head" data-reveal="up">
+      <div class="eyebrow">About me</div>
+      <button class="flip-btn" id="flipBtn" type="button" aria-label="Flip between the story and the timeline">
+        <span class="fb-ico">⟳</span><span class="fb-label">Flip to the timeline</span>
+      </button>
+    </div>
+
+    <div class="flip-stage" id="flipStage">
+      <div class="flip-panel front a-intro" id="storyPanel">
+      <p data-reveal="up" style="color:var(--text-dark);">I was born early on a Sunday morning in August 2002, in <b style="color:#234a48;">Saint Petersburg</b> &mdash; Russia&rsquo;s city built on water. But Petersburg was never mine. When I was three we moved south to <b style="color:#234a48;">Novorossiysk</b>, a working port on the Black Sea, and that is the place I call home. Cranes, cargo ships, the grey shimmer of distant water; in summer, the pebble beaches of the Sudzhuk spit. The sea was always there, on the edge of everything &mdash; until you realize you&rsquo;ve been orienting yourself around it the whole time.</p>
+      <p data-reveal="up" data-delay="50" style="color:var(--text-dark);">I was the kind of student whose photo ends up on the honor board. I tested into the city&rsquo;s most competitive school and got sent to olympiads in whatever subject they thought I&rsquo;d place in. On the side I trained as a flautist &mdash; eight years of conservatory in seven &mdash; and sewed things that ended up in city exhibitions. My hands have never learned how to sit still.</p>
+      <p data-reveal="up" data-delay="100" style="color:var(--text-dark);">My family is Protestant, which in Russia is its own quiet negotiation with the world &mdash; and which turned urgent in October 2017, when an agency told us our flight was in two weeks. We folded our lives into one suitcase each. At fifteen, I set foot on American soil for the first time: Charlotte, North Carolina, as religious refugees through the Lautenberg program.</p>
+      <p data-reveal="up" style="color:var(--text-dark);">My English was the kind years of Russian schooling produce &mdash; it resembles the language without quite doing anything. They put me in ESL; by spring I&rsquo;d tested into honors. It was not smooth: I translated nearly every worksheet word by word, walked home across a bridge over two highways, and showed up to class every single day &mdash; even the ones my anxious, often-sick body tried to talk me out of. I have always been stubborn in the most useful way.</p>
+      <p data-reveal="up" data-delay="50" style="color:var(--text-dark);">Over three years I changed high schools three times and woke at four for a 5&nbsp;a.m. bus. At Butler I finally loved it &mdash; AP sciences, symphonic band, a flute solo set for graduation &mdash; and then COVID took the spring. We&rsquo;d just bought a house I described, walking in, as &ldquo;what sin would look like if it had a physical form.&rdquo; We couldn&rsquo;t afford to fix it, so we became the people who fixed it &mdash; five months without a kitchen, an online class in my ear while I painted the window frames.</p>
+      <p data-reveal="up" data-delay="100" style="color:var(--text-dark);">I came to <b style="color:#234a48;">Wake Forest</b> in 2021 to be a biomedical engineer &mdash; the straight line out of &ldquo;you&rsquo;re smart, you should be a doctor.&rdquo; It lasted exactly one semester of biomechanics. That same year I started teaching myself Japanese; it stuck where other languages hadn&rsquo;t, became a minor, then a semester in Tokyo, then a second major I stayed an extra year to finish. (Somewhere in there I became a U.S. citizen, and my family became Axonov.)</p>
+      <p data-reveal="up" style="color:var(--text-dark);">The turn I didn&rsquo;t see coming happened underwater. On a trip to Okinawa in 2024 I snorkeled my first coral reef and gasped so hard I nearly choked &mdash; I&rsquo;d studied reefs for years, and none of it was the actual thing. I got certified, dove Okinawa, Jeju, and Belize, and somewhere on a cold boat realized I&rsquo;d do it all again in a heartbeat. That was when it stopped being a detour and became the path.</p>
+      <p data-reveal="up" data-delay="50" style="color:var(--text-dark);">So here I am: an engineer who fell for the ocean, a writer in two languages studying a third and a fourth, a marine ecologist in the making with a fantasy series waiting in the margins. I&rsquo;m writing this from Tbilisi, where the Black Sea in Batumi stopped me in my tracks after nine years away. I graduate in December&nbsp;2026, ship out for Antarctica the same month, and I&rsquo;m aiming &mdash; eventually, stubbornly &mdash; at a PhD in behavioral marine ecology. It was the long way to the sea.</p>
       <div class="a-quick">
-        <span class="a-fact"><b>Born</b> · Novorossiysk, RU</span>
+        <span class="a-fact"><b>Born</b> · St. Petersburg, RU</span>
+        <span class="a-fact"><b>Home</b> · Novorossiysk, RU</span>
         <span class="a-fact"><b>Now</b> · Winston-Salem, NC</span>
         <span class="a-fact"><b>Languages</b> · RU · EN · 日本語</span>
         <span class="a-fact"><b>At</b> · Wake Forest University</span>
         <span class="a-fact"><b>Grad</b> · December 2026</span>
+      </div>
+      <div class="a-press">
+        <span class="a-press-label">In the press</span>
+        <a class="a-press-link" href="https://wfuogb.com/29885/special-publications/grad-tab/graduation-tabloid-2026-grad-tab/japanese-language-and-culture-avelina-axonov/" target="_blank" rel="noopener">Profiled in the 2026 Graduation Tabloid — Wake Forest <i>Old Gold &amp; Black</i><span class="a-press-arrow">↗</span></a>
+      </div>
+      </div>
+
+      <div class="flip-panel back" id="tlPanel" hidden>
+        <div class="tl2">
+          <div class="tl2-item left" data-reveal="right"><span class="tl2-node"></span><div class="tl2-year">2002</div><div class="tl2-place">Saint Petersburg<span class="tl2-plus">+</span></div><div class="tl2-detail"><p>Born in Russia&rsquo;s city on the water &mdash; though it was never really mine.</p></div></div>
+          <div class="tl2-item right" data-reveal="left"><span class="tl2-node"></span><div class="tl2-year">2005</div><div class="tl2-place">Novorossiysk<span class="tl2-plus">+</span></div><div class="tl2-detail"><p>At three, home becomes a working Black Sea port &mdash; the place I actually call home, the water always on the edge of everything.</p></div></div>
+          <div class="tl2-item left" data-reveal="right"><span class="tl2-node"></span><div class="tl2-year">2017</div><div class="tl2-place">A suitcase, two weeks<span class="tl2-plus">+</span></div><div class="tl2-detail"><p>Refugee to North Carolina at fifteen, one suitcase each. Placed in ESL; tested into honors a semester later.</p></div></div>
+          <div class="tl2-item right" data-reveal="left"><span class="tl2-node"></span><div class="tl2-year">2018&ndash;21</div><div class="tl2-place">Three high schools<span class="tl2-plus">+</span></div><div class="tl2-detail"><p>A 5&nbsp;a.m. bus, AP sciences and symphonic band, a pandemic, and a falling-apart house rebuilt by hand.</p></div></div>
+          <div class="tl2-item left" data-reveal="right"><span class="tl2-node"></span><div class="tl2-year">2021</div><div class="tl2-place">Wake Forest<span class="tl2-plus">+</span></div><div class="tl2-detail"><p>Arrived set on biomedical engineering &mdash; the straight line from &ldquo;you should be a doctor.&rdquo; It lasted one semester of biomechanics.</p></div></div>
+          <div class="tl2-item right" data-reveal="left"><span class="tl2-node"></span><div class="tl2-year">2022</div><div class="tl2-place">The reroute<span class="tl2-plus">+</span></div><div class="tl2-detail"><p>First lab research &mdash; and teaching myself Japanese on the side, which stuck where other languages hadn&rsquo;t.</p></div></div>
+          <div class="tl2-item left" data-reveal="right"><span class="tl2-node"></span><div class="tl2-year">2023</div><div class="tl2-place">Tokyo<span class="tl2-plus">+</span></div><div class="tl2-detail"><p>A semester abroad; the Japanese minor grows into a second major worth staying an extra year for.</p></div></div>
+          <div class="tl2-item right" data-reveal="left"><span class="tl2-node"></span><div class="tl2-year">2024</div><div class="tl2-place">Citizen, Axonov, a reef<span class="tl2-plus">+</span></div><div class="tl2-detail"><p>U.S. citizenship and the family name &mdash; and a first coral reef in Okinawa that quietly changed the plan.</p></div></div>
+          <div class="tl2-item left" data-reveal="right"><span class="tl2-node"></span><div class="tl2-year">2025</div><div class="tl2-place">Into the water<span class="tl2-plus">+</span></div><div class="tl2-detail"><p>Scuba certified; oceanography at Bigelow Lab on the Gulf of Maine; reef expeditions in Belize and off Okinawa &amp; Jeju.</p></div></div>
+          <div class="tl2-item right" data-reveal="left"><span class="tl2-node"></span><div class="tl2-year">2026</div><div class="tl2-place">Tbilisi &middot; Antarctica<span class="tl2-plus">+</span></div><div class="tl2-detail"><p>A summer session in Tbilisi, graduation in December, then Antarctica the same month.</p></div></div>
+          <div class="tl2-item left" data-reveal="right"><span class="tl2-node"></span><div class="tl2-year">Next</div><div class="tl2-place">The open water<span class="tl2-plus">+</span></div><div class="tl2-detail"><p>A PhD in behavioral marine ecology. Still being written.</p></div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -131,95 +223,13 @@
 
 <div class="transect" data-transect data-label="transect 02"></div>
 
-<!-- TIMELINE -->
-<section class="bg-dark">
-  <div class="wrap">
-    <div class="tl-head">
-      <div class="eyebrow" data-reveal="up" style="justify-content:center;">The journey</div>
-      <h2 class="section-title" data-reveal="up" style="margin-top:0.8rem;">A life, charted.</h2>
-      <p style="color:var(--pale); margin-top:1rem;" data-reveal="up">A working timeline — edit the years and add the chapters only you know.</p>
-    </div>
-
-    <div class="timeline">
-      <div class="tl-item" data-reveal="right">
-        <div class="tl-node"></div>
-        <div class="tl-year">The beginning</div>
-        <div class="tl-place">Novorossiysk, Russia</div>
-        <p>Born and raised in a Black Sea port city. <span class="placeholder-text">[Owner: birth year + a line about home and family.]</span></p>
-      </div>
-      <div class="tl-item" data-reveal="left">
-        <div class="tl-node"></div>
-        <div class="tl-year">2016</div>
-        <div class="tl-place">Certificate in Music, with Honors</div>
-        <p>Flute performance, School of Music, Novorossiysk — the first thing I trained hard at.</p>
-        <span class="tl-tag">Flute</span>
-      </div>
-      <div class="tl-item" data-reveal="right">
-        <div class="tl-node"></div>
-        <div class="tl-year">[year]</div>
-        <div class="tl-place">Moving to the United States</div>
-        <p><span class="placeholder-text">[Owner: where you first landed, what year, and what that move was like — the big one.]</span></p>
-      </div>
-      <div class="tl-item" data-reveal="left">
-        <div class="tl-node"></div>
-        <div class="tl-year">[years]</div>
-        <div class="tl-place">High school in the U.S.</div>
-        <p><span class="placeholder-text">[Owner: which high school(s) and city/state — you mentioned more than one. A line on each.]</span></p>
-      </div>
-      <div class="tl-item up" data-reveal="right">
-        <div class="tl-node"></div>
-        <div class="tl-year">2021</div>
-        <div class="tl-place">Wake Forest University</div>
-        <p>Began a B.S. in Engineering (ME &amp; ECE concentrations), a B.A. in Japanese Language &amp; Culture, and a Biology minor.</p>
-        <span class="tl-tag">Triple path</span>
-      </div>
-      <div class="tl-item" data-reveal="left">
-        <div class="tl-node"></div>
-        <div class="tl-year">2022</div>
-        <div class="tl-place">First research — Henslee Lab</div>
-        <p>Red blood cell electrophysiology in a BSL2 lab; first conference poster (BMES, San Antonio).</p>
-        <span class="tl-tag">BSL2</span>
-      </div>
-      <div class="tl-item up" data-reveal="right">
-        <div class="tl-node"></div>
-        <div class="tl-year">2024</div>
-        <div class="tl-place">Richter Scholar — Japan &amp; beyond</div>
-        <p>Okinawa, Hokkaido, and Hawaii — researching Ryukyuan and Ainu cultural preservation. Also: South Korea.</p>
-        <span class="tl-tag">Fieldwork</span>
-      </div>
-      <div class="tl-item up" data-reveal="left">
-        <div class="tl-node"></div>
-        <div class="tl-year">2024–25</div>
-        <div class="tl-place">Belize — reef &amp; instrumentation</div>
-        <p>Designing and field-testing underwater camera housings and sensors at Lighthouse Reef Atoll. Where engineering met the ocean.</p>
-        <span class="tl-tag">Balistes</span>
-      </div>
-      <div class="tl-item" data-reveal="right">
-        <div class="tl-node"></div>
-        <div class="tl-year">2025</div>
-        <div class="tl-place">Gulf of Maine — Bigelow Lab</div>
-        <p>CTD profiling, plankton sampling, and oceanographic analysis at Bigelow Laboratory for Ocean Sciences.</p>
-      </div>
-      <div class="tl-item up" data-reveal="left">
-        <div class="tl-node"></div>
-        <div class="tl-year">2026</div>
-        <div class="tl-place">Tbilisi · Antarctica · Graduation</div>
-        <p>Upcoming programs in Tbilisi and Antarctica, a first-author paper, and graduation in December. The next chapter is still being written.</p>
-        <span class="tl-tag">What's next</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="transect" data-transect data-label="transect 03"></div>
-
 <!-- BEYOND THE CV -->
 <section class="bg-mid">
   <div class="wrap">
     <div class="eyebrow" data-reveal="up">Beyond the CV</div>
     <h2 class="section-title" data-reveal="up" style="margin-top:0.8rem;">The rest of me.</h2>
     <div class="beyond-grid" data-reveal-stagger="70">
-      <div class="beyond-card"><div class="bc-icon">Make</div><h4>Crochet</h4><p>I crochet — including, yes, a cuttlefish. <span class="placeholder-text">[Owner: what you love making, and why your hands need to stay busy.]</span></p></div>
+      <div class="beyond-card"><div class="bc-icon">Make</div><h4>Crochet &amp; craft</h4><p>I crochet &mdash; including, yes, a cuttlefish. It started early: as a kid I sewed pieces for city exhibitions, and my hands have needed something to do ever since.</p></div>
       <div class="beyond-card"><div class="bc-icon">Play</div><h4>Flute</h4><p>Classically trained, with honors. Music was my first discipline and it never quite left.</p></div>
       <div class="beyond-card"><div class="bc-icon">Study</div><h4>Linguistics &amp; languages</h4><p>Russian and English by birth, Japanese by devotion, with Arabic and Ukrainian in the mix. I think about how languages carry worlds.</p></div>
       <div class="beyond-card"><div class="bc-icon">Write</div><h4>Poetry &amp; prose</h4><p>I write — poems, stories, songs — in more than one language. <a href="writer.html" style="color:var(--aqua); border-bottom:1px solid var(--aqua-dim);">Read the writing →</a></p></div>
@@ -228,10 +238,10 @@
     </div>
 
     <div class="a-strip" data-reveal="fade">
-      <div class="imgframe" data-lightbox="assets/img/diver-v.jpg" data-caption="Descending with the camera rig"><img src="assets/img/diver-v.jpg" alt="Diving" /></div>
-      <div class="imgframe" data-lightbox="assets/img/beach-selfie.jpg" data-caption="Surface interval, Belize"><img src="assets/img/beach-selfie.jpg" alt="On the beach in a wetsuit" /></div>
-      <div class="imgframe" data-lightbox="assets/img/headshot-formal.png" data-caption="Avelina Axonov"><img src="assets/img/headshot-formal.png" alt="Formal portrait" /></div>
-      <div class="imgframe" data-lightbox="assets/img/me/kimono-torii.jpg" data-caption="Between worlds — in kimono at the torii gate, Japan"><img src="assets/img/me/kimono-torii.jpg" alt="In kimono at a torii gate in Japan" /></div>
+      <div class="imgframe" data-lightbox="assets/img/diver-v.jpg" data-caption="Descending with the camera rig"><img loading="lazy" decoding="async" src="assets/img/diver-v.jpg" alt="Diving" /></div>
+      <div class="imgframe" data-lightbox="assets/img/beach-selfie.jpg" data-caption="Surface interval, Belize"><img loading="lazy" decoding="async" src="assets/img/beach-selfie.jpg" alt="On the beach in a wetsuit" /></div>
+      <div class="imgframe" data-lightbox="assets/img/headshot-formal.jpg" data-caption="Avelina Axonov"><img loading="lazy" decoding="async" src="assets/img/headshot-formal.jpg" alt="Formal portrait" /></div>
+      <div class="imgframe" data-lightbox="assets/img/me/kimono-torii.jpg" data-caption="Between worlds — in kimono at the torii gate, Japan"><img loading="lazy" decoding="async" src="assets/img/me/kimono-torii.jpg" alt="In kimono at a torii gate in Japan" /></div>
     </div>
   </div>
 </section>
@@ -254,7 +264,7 @@
 <footer class="site-foot">
   <div class="wrap">
     <div class="foot-brand-row">
-      <img class="foot-logo" src="assets/logo.png" alt="Avelina, per sea logo" />
+      <img loading="lazy" decoding="async" class="foot-logo" src="assets/logo.png" alt="Avelina, per sea logo" />
       <div>
         <div class="foot-brand">Avelina<span class="comma">,</span> per sea</div>
         <div class="foot-tag">The long way to the sea.</div>
@@ -271,5 +281,49 @@
 </footer>
 
 <script src="assets/site.js"></script>
+<script src="assets/game.js"></script>
+<script>
+  (function () {
+    var btn = document.getElementById('flipBtn');
+    var story = document.getElementById('storyPanel');
+    var tl = document.getElementById('tlPanel');
+    var stage = document.getElementById('flipStage');
+    if (!btn || !story || !tl) return;
+    var label = btn.querySelector('.fb-label');
+    var sec = document.getElementById('aboutSec');
+    var onTimeline = false, busy = false;
+    // expandable timeline entries
+    Array.prototype.forEach.call(tl.querySelectorAll('.tl2-place'), function (pl) {
+      pl.addEventListener('click', function () { pl.closest('.tl2-item').classList.toggle('open'); });
+    });
+    function ripple() {
+      var host = stage || tl;
+      var r = host.getBoundingClientRect();
+      var x = r.left + r.width / 2, y = r.top + Math.min(r.height / 2, 150);
+      if (window.__perSeaRipple) window.__perSeaRipple(x, y, { rings: 4 });
+    }
+    function flip() {
+      if (busy) return;
+      busy = true;
+      ripple();
+      btn.classList.toggle('spun', !onTimeline);
+      if (sec) sec.classList.toggle('tl-mode', !onTimeline);
+      var cur = onTimeline ? tl : story;
+      var next = onTimeline ? story : tl;
+      cur.classList.add('fading');
+      setTimeout(function () {
+        cur.hidden = true; cur.classList.remove('fading');
+        next.hidden = false;
+        next.classList.add('fading'); void next.offsetWidth;   // start hidden, then fade in
+        if (next === tl) { tl.classList.remove('shown'); void tl.offsetWidth; tl.classList.add('shown'); }
+        requestAnimationFrame(function () { next.classList.remove('fading'); });
+        onTimeline = !onTimeline;
+        label.textContent = onTimeline ? 'Back to the story' : 'Flip to the timeline';
+        setTimeout(function () { busy = false; }, 460);
+      }, 300);
+    }
+    btn.addEventListener('click', flip);
+  })();
+</script>
 </body>
 </html>

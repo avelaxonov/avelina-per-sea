@@ -203,6 +203,13 @@ section { position: relative; }
 .foot-nav { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
 .foot-nav a { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pale); transition: color 0.2s; }
 .foot-nav a:hover { color: var(--aqua); }
+.foot-meta { width: 100%; margin-top: 1.6rem; padding-top: 1.3rem; border-top: 1px solid var(--pale-dim); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.6rem 1.5rem; }
+.foot-copy { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.02em; color: var(--pale); opacity: 0.7; max-width: 64ch; line-height: 1.5; }
+.foot-report { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.04em; color: var(--pale); opacity: 0.6; border-bottom: 1px solid transparent; transition: color 0.2s, opacity 0.2s, border-color 0.2s; white-space: nowrap; }
+.foot-report:hover { color: var(--aqua); opacity: 1; border-color: var(--aqua-dim); }
+
+/* justified prose for long-form reading + description blocks */
+.research-intro, .about-bio p, .a-intro p { text-align: justify; text-justify: inter-word; -webkit-hyphens: auto; hyphens: auto; }
 
 /* ============================================================
    PHOTO PLACEHOLDER (still used where no photo yet)
@@ -241,11 +248,12 @@ section { position: relative; }
 /* ============================================================
    MOBILE NAV
    ============================================================ */
-@media (max-width: 880px) {
+@media (max-width: 1024px) {
   .nav-links {
-    position: fixed; inset: 0 0 0 auto; width: min(78vw, 320px); flex-direction: column; align-items: flex-start;
-    justify-content: center; gap: 1.5rem; padding: 2rem var(--gutter);
-    background: rgba(10, 34, 36, 0.97); backdrop-filter: blur(20px);
+    position: fixed; top: 0; right: 0; bottom: auto; left: auto; height: 100vh; height: 100dvh;
+    width: min(80vw, 330px); flex-direction: column; align-items: flex-start;
+    justify-content: flex-start; gap: 1.15rem; padding: 5.5rem var(--gutter) 2.5rem; overflow-y: auto; -webkit-overflow-scrolling: touch;
+    background: rgba(10, 34, 36, 0.98); backdrop-filter: blur(20px);
     transform: translateX(100%); transition: transform 0.4s var(--ease-out); border-left: 1px solid var(--pale-dim);
   }
   .nav-links.open { transform: translateX(0); }

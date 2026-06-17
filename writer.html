@@ -16,20 +16,45 @@
 body { background: var(--deep-sea); }
 .w-accent { color: var(--amber); }
 
-/* HERO */
-.w-hero { min-height: 78vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 80px; }
-.w-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(120% 90% at 80% 15%, rgba(196,154,90,0.14), transparent 55%), radial-gradient(80% 70% at 10% 90%, rgba(107,191,190,0.10), transparent 60%); }
-.w-hero-inner { position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); width: 100%; }
-.w-back { margin-bottom: 2rem; }
-.w-kicker { font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--amber); }
-.w-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(3rem, 9vw, 6.6rem); line-height: 0.95; letter-spacing: -0.03em; color: var(--text-light); margin: 1rem 0; }
+/* HERO — two-column: identity on the left, the companion-poem epigraph on the right */
+.w-hero { min-height: 74vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 104px; padding-bottom: 3.5rem; }
+.w-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(120% 90% at 82% 12%, rgba(196,154,90,0.16), transparent 56%), radial-gradient(80% 70% at 8% 92%, rgba(107,191,190,0.10), transparent 60%); }
+.w-hero-inner { position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); width: 100%; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.w-hero-lead { min-width: 0; position: relative; }
+.w-back { margin-bottom: 2.2rem; }
+.w-kicker { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--amber); }
+.w-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(3rem, 8vw, 6.4rem); line-height: 0.94; letter-spacing: -0.03em; color: var(--text-light); margin: 1.1rem 0 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .w-title em { font-style: italic; font-weight: 500; color: var(--amber); }
-.w-tagline { font-family: var(--font-display); font-style: italic; font-size: clamp(1.1rem, 2.2vw, 1.55rem); color: var(--pale); max-width: none; white-space: nowrap; }
-.w-penname { margin-top: 2rem; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; color: var(--pale); display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
-.w-penname b { color: var(--amber); font-weight: 500; }
-.w-epigraph { margin-top: 2.2rem; font-family: var(--font-serif); font-style: italic; font-size: clamp(1.05rem, 2vw, 1.32rem); color: var(--pale); line-height: 1.5; max-width: 34ch; }
-.w-epigraph .w-epi-src { display: block; margin-top: 0.55rem; font-family: var(--font-mono); font-style: normal; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--amber); opacity: 0.85; }
-.w-epigraph .w-epi-src em { font-style: italic; }
+.w-title .w-hint { display: block; margin-top: 0.5rem; font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber); opacity: 0; transition: opacity 0.4s; }
+.w-title:hover .w-hint { opacity: 0.5; }
+
+/* the weaver — descends from the headline on a silk thread when you click it */
+.w-title-wrap { position: relative; display: inline-block; }
+.w-apos { position: relative; }
+.silk-drop { position: absolute; top: 0.34em; left: 50%; transform: translateX(-50%); z-index: 1; width: max-content; display: flex; flex-direction: column; align-items: center; transform-origin: top center; pointer-events: none; }
+.silk-thread { width: 2px; height: 0; background: linear-gradient(to bottom, rgba(201,164,106,0), rgba(201,164,106,0.92)); transition: height 0.65s cubic-bezier(0.5,0.05,0.25,1); }
+.silk-worm { width: 0; max-width: none; opacity: 0; margin-top: -2px; filter: drop-shadow(0 10px 18px rgba(0,0,0,0.5)); transition: width 0.55s var(--ease-out), opacity 0.45s; }
+.silk-drop.dropped .silk-thread { height: clamp(84px, 14vh, 156px); }
+.silk-drop.dropped .silk-worm { width: clamp(64px, 8.5vw, 100px); opacity: 1; pointer-events: auto; cursor: pointer; }
+.silk-drop.dropped { animation: wormSway 3.8s ease-in-out 0.6s infinite; }
+@keyframes wormSway { 0%,100% { transform: translateX(-50%) rotate(-3deg); } 50% { transform: translateX(-50%) rotate(3deg); } }
+@media (prefers-reduced-motion: reduce) { .silk-drop.dropped { animation: none; } .silk-thread, .silk-worm { transition: none; } }
+.w-tagline { margin-top: 1.3rem; font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: clamp(1.15rem, 2.2vw, 1.6rem); line-height: 1.4; color: var(--pale); max-width: 24ch; }
+.w-langs { margin-top: 1.8rem; font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.04em; line-height: 1.7; color: var(--pale); opacity: 0.88; max-width: 38ch; }
+.w-langs b { color: var(--text-light); font-weight: 500; }
+
+/* featured epigraph — Weaver's Demise, the poem that answers the section's name */
+.w-epi { position: relative; padding-left: clamp(1.4rem, 3vw, 2.2rem); border-left: 2px solid rgba(196,154,90,0.55); margin: 0; }
+.w-epi .w-epi-quote { font-family: var(--font-serif); font-style: italic; font-weight: 500; font-size: clamp(1.2rem, 2.3vw, 1.75rem); line-height: 1.5; color: var(--text-light); text-wrap: pretty; }
+.w-epi .w-epi-quote .em { color: var(--amber); }
+.w-epi .w-epi-src { margin-top: 1.2rem; font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.08em; color: var(--amber); }
+.w-epi .w-epi-src a { color: var(--amber); border-bottom: 1px solid rgba(196,154,90,0.45); transition: border-color 0.2s; }
+.w-epi .w-epi-src a:hover { border-color: var(--amber); }
+.w-epi .w-epi-src em { font-style: italic; color: var(--pale); }
+.w-epi .w-epi-tag { display: block; margin-top: 0.4rem; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.04em; color: var(--pale); opacity: 0.72; }
+@media (max-width: 880px) {
+  .w-hero-inner { grid-template-columns: 1fr; gap: 2.4rem; }
+}
 
 /* MEANING strip */
 .w-meaning { border-top: 1px solid var(--pale-dim); border-bottom: 1px solid var(--pale-dim); background: rgba(196,154,90,0.04); }
@@ -54,6 +79,7 @@ body { background: var(--deep-sea); }
 .badge { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.55rem; border-radius: 100px; border: 1px solid var(--pale-dim); color: var(--pale); }
 .badge.cat { color: var(--amber); border-color: rgba(196,154,90,0.4); }
 .badge.lang { color: var(--aqua); border-color: var(--aqua-dim); }
+.badge.trans { color: #C7A8FF; border-color: rgba(199,168,255,0.42); }
 .work h3 { font-size: 1.35rem; color: var(--text-light); line-height: 1.15; }
 .work h3 .ru { font-weight: 500; }
 .work .work-status { font-family: var(--font-mono); font-size: 0.68rem; color: var(--pale); margin-top: 0.3rem; opacity: 0.8; }
@@ -63,7 +89,17 @@ body { background: var(--deep-sea); }
 .work .work-foot { margin-top: 1.3rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; color: var(--amber); display: flex; align-items: center; gap: 0.5rem; }
 .work.feature { grid-column: span 2; background: linear-gradient(135deg, rgba(196,154,90,0.08), rgba(107,191,190,0.04)); }
 .work.feature h3 { font-size: 1.8rem; }
-.work.feature .excerpt { font-size: 1.1rem; }
+.work.feature .excerpt { font-size: 1.05rem; }
+.work.feature .feature-inner { display: grid; grid-template-columns: 0.62fr 1fr; gap: clamp(1.2rem, 3vw, 2.2rem); align-items: center; }
+.work.feature .feature-art { background: #F3ECDD; border: 1px solid rgba(196,154,90,0.45); border-radius: 4px; padding: clamp(0.8rem,2vw,1.2rem); display: flex; align-items: center; justify-content: center; align-self: stretch; }
+.work.feature .feature-art img { width: 100%; max-width: 240px; }
+.work.feature .feature-text { min-width: 0; }
+.work.feature:hover .feature-art { border-color: rgba(196,154,90,0.75); }
+@media (max-width: 680px) { .work.feature .feature-inner { grid-template-columns: 1fr; } }
+/* list view: drop the plate, let the text flow like the other rows */
+.lib-grid.list .work.feature .feature-art { display: none; }
+.lib-grid.list .work.feature .feature-inner,
+.lib-grid.list .work.feature .feature-text { display: contents; }
 
 /* view toggle */
 .view-toggle { display: flex; gap: 0.4rem; }
@@ -142,10 +178,22 @@ body { background: var(--deep-sea); }
 .po-body .stanza { font-family: var(--font-serif); font-weight: 400; font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.72; color: #DCE6E4; margin: 0 0 1.4rem; }
 .po-body .stanza:last-child { margin-bottom: 0; }
 .po-body .interject, .po-also .interject { font-style: italic; color: var(--amber); font-size: 0.9em; opacity: 0.92; }
+.po-body .hl, .po-also .hl { color: var(--amber); font-weight: 500; }
+.po-body .echo, .po-also .echo { display: inline-block; margin-left: 1.6em; font-style: italic; font-size: 0.9em; color: var(--amber); opacity: 0.82; }
+.po-body .echo:has(.spoiler), .po-also .echo:has(.spoiler) { opacity: 1; font-style: normal; }
+.po-body .spoiler, .po-also .spoiler { position: relative; display: inline-block; color: transparent; cursor: pointer; user-select: none; font-style: italic; }
+.po-body .spoiler::after, .po-also .spoiler::after { content: "\00B7 \00B7 \00B7 \00B7 \00B7 \00B7"; position: absolute; inset: 0; color: var(--amber); opacity: 0.5; font-style: normal; letter-spacing: 0.04em; pointer-events: none; transition: opacity 0.25s; white-space: nowrap; }
+.po-body .spoiler:hover::after, .po-also .spoiler:hover::after { opacity: 0.82; }
+.po-body .spoiler.revealed, .po-also .spoiler.revealed { color: var(--amber); font-weight: 500; }
+.po-body .spoiler.revealed::after, .po-also .spoiler.revealed::after { opacity: 0; }
 .po-also { margin-top: 2.4rem; }
 .po-also-label { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); margin-bottom: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--pale-dim); }
 .po-also .stanza { font-family: var(--font-serif); font-size: clamp(0.92rem, 1.5vw, 1rem); color: var(--pale); line-height: 1.72; }
 .po-note { margin-top: 2.4rem; font-family: var(--font-body); font-size: 0.93rem; font-style: italic; color: var(--pale); line-height: 1.7; padding: 1.1rem 1.3rem; border-left: 2px solid var(--amber); background: rgba(196,154,90,0.05); border-radius: 0 4px 4px 0; }
+.mt-wrap { margin: 0 0 1.5rem; }
+.mt-toggle { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; color: var(--aqua); background: none; border: 1px solid var(--aqua-dim); border-radius: 100px; padding: 0.5rem 1rem; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+.mt-toggle:hover { background: rgba(107,191,190,0.1); border-color: var(--aqua); }
+.mt-note { margin-top: 0.85rem; font-family: var(--font-body); font-size: 0.8rem; font-style: italic; color: var(--pale); opacity: 0.85; line-height: 1.55; } background: rgba(196,154,90,0.05); border-radius: 0 4px 4px 0; }
 .po-related { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.6rem; }
 .po-related a { font-family: var(--font-mono); font-size: 0.72rem; color: var(--aqua); border: 1px solid var(--aqua-dim); border-radius: 100px; padding: 0.4rem 0.85rem; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
 .po-related a:hover { background: rgba(107,191,190,0.1); border-color: var(--aqua); }
@@ -168,7 +216,14 @@ body { background: var(--deep-sea); }
   .work.feature h3 { font-size: 1.45rem; }
   .work.feature .excerpt { font-size: 1rem; }
 }
+/* ATMOSPHERE photo band */
+.w-photo { position: relative; width: 100%; height: clamp(300px, 46vh, 500px); overflow: hidden; border-bottom: 1px solid var(--pale-dim); }
+.w-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 32%; }
+.w-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(30,10,17,0.55) 0%, rgba(30,10,17,0.10) 28%, rgba(30,10,17,0.12) 62%, rgba(30,10,17,0.92) 100%); pointer-events: none; }
+.w-photo figcaption { position: absolute; left: 0; right: 0; bottom: clamp(1.1rem, 3vw, 2rem); z-index: 2; text-align: center; font-family: var(--font-serif); font-style: italic; font-size: clamp(1.05rem, 2.2vw, 1.5rem); color: #F4E7E5; text-wrap: balance; padding: 0 var(--gutter); text-shadow: 0 2px 24px rgba(20,6,10,0.7); }
+.w-photo figcaption .em { color: var(--amber); }
 </style>
+<link rel="stylesheet" href="assets/cradle.css" />
 </head>
 <body>
 
@@ -188,21 +243,32 @@ body { background: var(--deep-sea); }
 <!-- HERO -->
 <header class="w-hero">
   <div class="w-hero-inner">
-    <div class="w-back"><a href="index.html" class="backlink">← back to per sea</a></div>
-    <div class="w-kicker" data-reveal="up">Writing &amp; Ideas · the humanities side</div>
-    <h1 class="w-title" data-reveal="up" data-delay="80">Weaver's <em>Cradle</em></h1>
-    <p class="w-tagline" data-reveal="up" data-delay="160">Shards of words create a kaleidoscope of stories.</p>
-    <div class="w-penname" data-reveal="up" data-delay="240">
-      <span>Writes in Russian &amp; English · studying Japanese &amp; Arabic · Ukrainian</span>
+    <div class="w-hero-lead">
+      <div class="w-back"><a href="index.html" class="backlink">← back to per sea</a></div>
+      <div class="w-kicker" data-reveal="up">Writing &amp; Ideas · the humanities side</div>
+      <div class="w-title-wrap">
+        <h1 class="w-title" id="cradleTitle" data-reveal="up" data-delay="80" title="give it a tug">Weaver<span class="w-apos">&rsquo;<span class="silk-drop" id="silkDrop" aria-hidden="true"><span class="silk-thread"></span><img loading="lazy" decoding="async" class="silk-worm" src="assets/img/silkworm.png" alt="" draggable="false" /></span></span>s <em>Cradle</em><span class="w-hint">tug me</span></h1>
+      </div>
+      <p class="w-tagline" data-reveal="up" data-delay="160">Shards of words create a kaleidoscope of stories.</p>
+      <div class="w-langs" data-reveal="up" data-delay="240">Writes in <b>Russian</b> &amp; <b>English</b> · studying <b>Japanese</b> &amp; <b>Arabic</b> · <b>Ukrainian</b></div>
     </div>
-    <div class="w-epigraph" data-reveal="up" data-delay="300">«The words of the poet have gentle embrace.»<span class="w-epi-src">— from <em>Weaver&rsquo;s Demise</em></span></div>
+    <figure class="w-epi" data-reveal="up" data-delay="320">
+      <blockquote class="w-epi-quote">For as the silkworm weaves the threads<br />Of the <span class="em">cradle</span> where its breathing ends,<br />So too the poet with each line refined<br />May find <span class="em">demise</span> in the words intertwined.</blockquote>
+      <figcaption class="w-epi-src">— from <a href="poem.html?p=weavers-demise"><em>Weaver&rsquo;s Demise</em></a><span class="w-epi-tag">the poem this section is named for</span></figcaption>
+    </figure>
   </div>
 </header>
+
+<!-- ATMOSPHERE -->
+<figure class="w-photo" data-reveal="up">
+  <img loading="lazy" decoding="async" src="assets/img/cradle-fan.jpg" alt="The author at dusk in a red dress, holding a painted fan, warm window-lights blurred in the field behind her." />
+  <figcaption>Between the <span class="em">cradle</span> and the coffin, a thread.</figcaption>
+</figure>
 
 <!-- MEANING -->
 <section class="w-meaning">
   <div class="wrap">
-    <div class="silk-poem-lg" data-reveal="right" style="text-wrap:pretty;">The silkworm <span style="color:var(--aqua);">weaves</span> its cocoon<span style="white-space:nowrap;">&mdash;a <span style="color:var(--aqua);">cradle</span>&mdash;</span>not knowing if it&rsquo;ll turn into a coffin.</div>
+    <div class="silk-poem-lg" data-reveal="right" style="text-wrap:pretty;">The silkworm <span style="color:var(--aqua);">weaves</span> its cocoon<span style="white-space:nowrap;">&mdash;a <span style="color:var(--amber);">cradle</span>&mdash;</span>not knowing if it&rsquo;ll turn into a coffin.</div>
     <div data-reveal="left">
       <p>The name <b>Weaver's Cradle</b> reads first as a beginning — the cradle where ideas, stories, and creativity are born. Yet the cocoon a silkworm spins is its cradle <i>and</i>, in sericulture, the place it never leaves. The same object holds opposite roles; the tragedy stays folded inside the image, for the reader to discover. Creation that already contains its ending — beauty made through sacrifice.</p>
       <p style="margin-top:1.2rem;">I'm a bilingual writer — Russian and English — who moved to the U.S. at fifteen. My work ranges from poetry and music to short stories and novels, in both languages, with Japanese and Arabic on the way. This is where the science sets down its instruments and the writing picks&nbsp;up.</p>
@@ -216,7 +282,7 @@ body { background: var(--deep-sea); }
     <div class="lib-head">
       <div>
         <div class="eyebrow w-accent" data-reveal="up" style="color:var(--amber);">The Library</div>
-        <h2 class="section-title" data-reveal="up" style="margin-top:0.8rem;">Everything, in one shelf.</h2>
+        <h2 class="section-title" data-reveal="up" style="margin-top:0.8rem;">Everything, on one shelf.</h2>
       </div>
       <div class="view-toggle" data-reveal="up">
         <button class="vt active" data-view="grid" aria-label="Grid view"><span></span><span></span><span></span><span></span> Cards</button>
@@ -229,6 +295,7 @@ body { background: var(--deep-sea); }
       <button class="tab" data-filter="prose">Prose</button>
       <button class="tab" data-filter="songs">Songs</button>
       <button class="tab" data-filter="academic">Academic</button>
+      <button class="tab" data-filter="translations">Translations</button>
     </div>
 
     <div class="sortbar" data-reveal="up">
@@ -258,14 +325,19 @@ body { background: var(--deep-sea); }
     <div class="lib-grid" id="libGrid">
 
       <!-- FEATURE: signature short story -->
-      <article class="work feature" data-cat="prose" id="prose-anchor" data-lang="en" data-date="" data-title="A Bird and A Star">
-        <div class="work-top"><div class="work-badges"><span class="badge cat">Short story</span><span class="badge lang">English</span><span class="badge">Award winner</span></div></div>
-        <h3>A Bird and A Star</h3>
-        <div class="work-status">Sci-fi · Space Club Pick Award, Temple University Japan Campus</div>
-        <p class="excerpt italic">"When the stars set themselves in a pattern, people desperately try to find a sign. But in the process, something gets irrevocably lost."</p>
-        <p class="excerpt">A sci-fi short story about two college girls trying to uncover the truth. <span class="todo">[Owner: paste full text or link a reading sub-page]</span></p>
-        <div class="work-foot">Read the full story →</div>
-      </article>
+      <a class="work feature" href="story.html" data-cat="prose" id="prose-anchor" data-lang="en" data-date="2023" data-title="A Bird and A Star">
+        <div class="feature-inner">
+          <div class="feature-art"><img loading="lazy" decoding="async" src="assets/img/bird-and-star.png" alt="Ink sketch of a crow with one wing raised beside a jagged star — A Bird and A Star" /></div>
+          <div class="feature-text">
+            <div class="work-top"><div class="work-badges"><span class="badge cat">Short story</span><span class="badge lang">English</span><span class="badge">Award winner</span></div></div>
+            <h3>A Bird and A Star</h3>
+            <div class="work-status">Sci-fi · Space Club Pick Award, Temple University, Japan Campus</div>
+            <p class="excerpt italic">"When the stars set themselves in a pattern, people desperately try to find a sign. But in the process, something gets irrevocably lost."</p>
+            <p class="excerpt">Two students in a small Tokyo library trace the convergence points where the universe leaks its energy — and one of them is not what she seems.</p>
+            <div class="work-foot">Read the full story →</div>
+          </div>
+        </div>
+      </a>
 
       <!-- POETRY — rendered from assets/poems.js, inserted right after the feature card -->
 
@@ -300,20 +372,21 @@ body { background: var(--deep-sea); }
       </article>
 
       <!-- ACADEMIC -->
-      <article class="work" data-cat="academic" id="academic-anchor" data-lang="en" data-date="" data-title="Garden of Women">
-        <div class="work-top"><div class="work-badges"><span class="badge cat">Honors thesis</span></div></div>
-        <h3>"Garden of Women"</h3>
-        <div class="work-status">EAL 376 · in progress</div>
-        <p class="excerpt"><span class="todo">[Owner to add framing — 2–3 sentences]</span></p>
-        <div class="work-foot">About this work →</div>
-      </article>
+      <a class="work" href="essay-garden-of-women.html" data-cat="academic" id="academic-anchor" data-lang="en" data-date="2026" data-title="A Garden of Women">
+        <div class="work-top"><div class="work-badges"><span class="badge cat">Honors thesis</span><span class="badge lang">English</span></div></div>
+        <h3>A Garden of Women</h3>
+        <div class="work-status">East Asian Languages &amp; Cultures · May 2026</div>
+        <p class="excerpt">How <em>The Apothecary Diaries</em> rewrites the “poison woman” — reading Maomao and Shisui as figures who turn dosage, disguise, and quiet networks into forms of female agency.</p>
+        <div class="work-foot">Read the thesis →</div>
+      </a>
 
-      <article class="work" data-cat="academic" data-lang="ja" data-date="" data-title="Flowers for Sale">
-        <h3>"Flowers for Sale"</h3>
-        <div class="work-status">Japanese major senior thesis</div>
-        <p class="excerpt"><span class="todo">[Owner to add framing — 2–3 sentences]</span></p>
-        <div class="work-foot">About this work →</div>
-      </article>
+      <a class="work" href="essay-flowers-for-sale.html" data-cat="academic" data-lang="en" data-date="2025" data-title="Flowers for Sale">
+        <div class="work-top"><div class="work-badges"><span class="badge cat">Senior thesis</span><span class="badge lang">English</span></div></div>
+        <h3>Flowers for Sale</h3>
+        <div class="work-status">Japanese Language &amp; Culture · December 2025</div>
+        <p class="excerpt">Petals, poisons, and female agency in <em>The Apothecary Diaries</em> — how the hanamachi and the palace cultivate women like flowers, and how one apothecary survives by knowing when not to bloom.</p>
+        <div class="work-foot">Read the thesis →</div>
+      </a>
 
       <article class="work" data-cat="academic" data-lang="en" data-date="2024" data-title="Surviving the Sea of Homogeneity">
         <h3>Surviving the Sea of Homogeneity</h3>
@@ -337,8 +410,6 @@ body { background: var(--deep-sea); }
       <p class="le-sub" id="leSub">No works match the current filters.</p>
       <button type="button" class="le-reset" id="leReset">Clear filters</button>
     </div>
-
-    <div class="lib-note" data-reveal="up">One shelf, filtered by kind and language. As each piece is ready, its card opens into its own reading page — clean type, no clutter.</div>
   </div>
 </section>
 
@@ -365,7 +436,7 @@ body { background: var(--deep-sea); }
 <footer class="site-foot">
   <div class="wrap">
     <div class="foot-brand-row">
-      <img class="foot-logo" src="assets/logo.png" alt="Avelina, per sea logo" />
+      <img loading="lazy" decoding="async" class="foot-logo" src="assets/logo.png" alt="Avelina, per sea logo" />
       <div>
         <div class="foot-brand">Weaver's <span class="comma">Cradle</span></div>
         <div class="foot-tag">the literary side of Avelina, per sea</div>
@@ -382,7 +453,8 @@ body { background: var(--deep-sea); }
 </footer>
 
 <script src="assets/site.js"></script>
-<script src="assets/poems.js"></script>
+<script src="assets/game.js"></script>
+<script src="assets/poems.js?v=20260617"></script>
 <script>
 /* Render the poetry shelf from the shared poems data, right after the feature card.
    Cards are real links to poem.html (share / new-tab / no-JS friendly), but a plain
@@ -402,7 +474,7 @@ body { background: var(--deep-sea); }
   var frag = document.createDocumentFragment();
   window.POEM_ORDER.forEach(function (slug) {
     var p = window.POEMS[slug]; if (!p) return;
-    var firstLine = p.text.trim().split(/\n/).slice(0, 2).join(' ').replace(/\(\(|\)\)/g, '');
+    var firstLine = p.text.trim().split(/\n/).filter(function (l) { return !/^>\s/.test(l); }).slice(0, 2).join(' ').replace(/\(\(|\)\)|\*\*|\|\|/g, '');
     var a = document.createElement('a');
     a.className = 'work poem-card';
     a.href = 'poem.html?p=' + slug;
@@ -412,10 +484,13 @@ body { background: var(--deep-sea); }
     a.setAttribute('data-date', String(p.year || ''));
     a.setAttribute('data-title', p.title);
     a.setAttribute('data-coll', collOf(slug));
+    if (p.kind === 'Translation' || p.xlation) a.setAttribute('data-translation', '1');
+    var transBadge = (p.kind === 'Translation' || p.xlation) ? '<span class="badge trans">Translation</span>' : '';
+    var transLine = p.xlation ? '<div class="work-status">Translation · ' + esc(p.xlation) + '</div>' : '';
     a.innerHTML =
       '<div class="work-top"><div class="work-badges"><span class="badge cat">Poem</span>' +
-      '<span class="badge lang">' + langLabel(p.lang) + '</span></div></div>' +
-      '<h3>' + esc(p.title) + '</h3>' +
+      '<span class="badge lang">' + langLabel(p.lang) + '</span>' + transBadge + '</div></div>' +
+      '<h3>' + esc(p.title) + '</h3>' + transLine +
       '<p class="excerpt italic">' + esc(firstLine) + '…</p>' +
       '<div class="work-foot">Read →</div>';
     frag.appendChild(a);
@@ -447,6 +522,13 @@ body { background: var(--deep-sea); }
 
   function langName(l) { return l === 'ru' ? 'Russian' : (l === 'mixed' ? 'Bilingual' : (l === 'ja' ? 'Japanese' : 'English')); }
 
+  function wireOverlaySpoilers(scope) {
+    Array.prototype.forEach.call(scope.querySelectorAll('.spoiler'), function (el) {
+      el.addEventListener('click', function () { el.classList.toggle('revealed'); });
+      el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.classList.toggle('revealed'); } });
+    });
+  }
+
   function render(slug) {
     var p = window.POEMS[slug];
     if (!p) return;
@@ -458,6 +540,40 @@ body { background: var(--deep-sea); }
     if (p.kind) meta.push(p.kind);
     elMeta.innerHTML = meta.map(function (m) { return '<span>' + m + '</span>'; }).join('<span class="sep">·</span>');
     elBody.innerHTML = window.renderPoemText(p.text);
+    wireOverlaySpoilers(elBody);
+    // machine-translation toggle (foreign poems without a human translation)
+    var oldMt = overlay.querySelector('.mt-wrap'); if (oldMt) oldMt.remove();
+    if (p.mt) {
+      var mw = document.createElement('div'); mw.className = 'mt-wrap';
+      var mb = document.createElement('button'); mb.type = 'button'; mb.className = 'mt-toggle';
+      mb.textContent = 'Show machine translation \u21C4';
+      var mn = document.createElement('div'); mn.className = 'mt-note'; mn.hidden = true;
+      mn.innerHTML = '\u273B A machine translation. It follows the imagery and meaning more than the rhyme or meter.';
+      elBody.parentNode.insertBefore(mw, elBody); mw.appendChild(mb); mw.appendChild(mn);
+      var onMt = false;
+      mb.addEventListener('click', function () {
+        onMt = !onMt;
+        elBody.innerHTML = window.renderPoemText(onMt ? p.mt : p.text);
+        wireOverlaySpoilers(elBody);
+        mb.textContent = onMt ? 'Show the original \u21C4' : 'Show machine translation \u21C4';
+        mn.hidden = !onMt;
+      });
+    }
+    // human-translated poems: jump-to-translation-note button
+    var oj = overlay.querySelector('.mt-jump'); if (oj) oj.remove();
+    if (!p.mt && p.related && p.related.length) {
+      var jw = document.createElement('div'); jw.className = 'mt-wrap mt-jump';
+      var jb = document.createElement('button'); jb.type = 'button'; jb.className = 'mt-toggle';
+      jb.textContent = 'Translations \u2193'; jw.appendChild(jb);
+      elBody.parentNode.insertBefore(jw, elBody);
+      jb.addEventListener('click', function () {
+        var panel = overlay.querySelector('.po-panel');
+        var target = (elNote && elNote.firstChild) ? elNote : elRelated;
+        if (!panel || !target) return;
+        var y = target.getBoundingClientRect().top - panel.getBoundingClientRect().top + panel.scrollTop - 24;
+        panel.scrollTo({ top: y, behavior: 'smooth' });
+      });
+    }
     elAlso.innerHTML = (p.also && p.also.length) ? p.also.map(function (a) {
       return '<div class="po-also"><div class="po-also-label">' + a.label + '</div>' + window.renderPoemText(a.text) + '</div>';
     }).join('') : '';
@@ -598,7 +714,7 @@ body { background: var(--deep-sea); }
   }
 
   function labelFor(kind, val) {
-    if (kind === 'cat') return { poetry: 'Poetry', prose: 'Prose', songs: 'Songs', academic: 'Academic' }[val] || val;
+    if (kind === 'cat') return { poetry: 'Poetry', prose: 'Prose', songs: 'Songs', academic: 'Academic', translations: 'Translations' }[val] || val;
     if (kind === 'lang') return { en: 'English', ru: 'Russian', ja: 'Japanese', mixed: 'Bilingual' }[val] || val;
     if (kind === 'coll') { var cs = window.COLLECTIONS || {}; return (cs[val] && cs[val].title) || 'Through Lilacs and Ashes'; }
     return val;
@@ -610,7 +726,9 @@ body { background: var(--deep-sea); }
   function applyFilter() {
     var shown = 0;
     works.forEach(function (w) {
-      var catOk = (activeFilter === 'all' || w.getAttribute('data-cat') === activeFilter);
+      var catOk = (activeFilter === 'all') ? true
+        : (activeFilter === 'translations' ? (w.getAttribute('data-translation') === '1')
+        : (w.getAttribute('data-cat') === activeFilter));
       var langOk = (activeLang === 'all' || (w.getAttribute('data-lang') || 'mixed') === activeLang);
       var collOk = (activeColl === 'all' || w.getAttribute('data-coll') === activeColl);
       var ok = catOk && langOk && collOk;
@@ -667,6 +785,18 @@ body { background: var(--deep-sea); }
   // default view: alphabetical A → Z
   applySort('title');
 })();
+</script>
+<script>
+  /* the weaver: click the headline and the silkworm descends on a silk thread */
+  (function () {
+    var title = document.getElementById('cradleTitle');
+    var drop = document.getElementById('silkDrop');
+    if (!title || !drop) return;
+    var open = false;
+    title.addEventListener('click', function () { open = !open; drop.classList.toggle('dropped', open); });
+    var worm = drop.querySelector('.silk-worm');
+    if (worm) worm.addEventListener('click', function (e) { e.stopPropagation(); open = false; drop.classList.remove('dropped'); });
+  })();
 </script>
 </body>
 </html>

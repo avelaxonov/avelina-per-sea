@@ -15,17 +15,30 @@
   function renderLine(l) {
     var s = esc(l);
     s = s.replace(/\(\(\s*/g, '<span class="interject">').replace(/\s*\)\)/g, '</span>');
+    // **highlight** a word/phrase (accent color)
+    s = s.replace(/\*\*(.+?)\*\*/g, '<span class="hl">$1</span>');
+    // ||spoiler|| — redacted bar, click to reveal
+    s = s.replace(/\|\|(.+?)\|\|/g, '<span class="spoiler" tabindex="0" role="button" aria-label="reveal hidden line">$1</span>');
     return s;
   }
   window.renderPoemText = function (text) {
     return text.trim().split(/\n\s*\n/).map(function (st) {
-      return '<p class="stanza">' + st.split(/\n/).map(renderLine).join('<br>') + '</p>';
+      return '<p class="stanza">' + st.split(/\n/).map(function (ln) {
+        // a line beginning with "> " is an echo / whispered aside
+        if (/^>\s/.test(ln)) return '<span class="echo">' + renderLine(ln.replace(/^>\s/, '')) + '</span>';
+        return renderLine(ln);
+      }).join('<br>') + '</p>';
     }).join('');
   };
 
   // Curated collections. A poem belongs to a collection if its slug is listed here.
   // (Membership is editable in one place — adjust the slug lists freely.)
   window.COLLECTIONS = {
+    "translations": {
+      title: "Translations",
+      note: "Poems carried across languages — some of mine in both directions, and one of Pushkin’s.",
+      slugs: ["pushkin-georgia", "my-may", "infinity", "i-can-see-the-infinity", "umirayushchiy-soldat"]
+    },
     "lilacs-ashes": {
       title: "Through Lilacs and Ashes",
       titleRu: "Сквозь сирень и пепел",
@@ -36,6 +49,41 @@
   };
 
   window.POEMS = {
+
+    "weavers-demise": {
+      title: "Weaver's Demise", lang: "en", date: "2024", year: 2024, kind: "Poem",
+      note: "The poem this section answers — a cradle, and its demise. Still unfolding.",
+      text:
+`For as the silkworm weaves the threads
+Of the cradle where its breathing ends,
+So too the poet with each line refined
+May find demise in the words intertwined.
+
+⋯
+
+But just as silk garments have weaver's trace,
+The words of the poet have gentle embrace.`
+    },
+
+    "garden-lit-in-red": {
+      title: "A Garden Lit in Red", lang: "en", date: "2025", year: 2025, kind: "Poem",
+      note: "A companion to the two theses \u2014 Flowers for Sale and A Garden of Women. The flowers are the women cultivated, sold, and survived by their own poison; the garden is the pleasure quarter lit in red.",
+      text:
+`Sweet on the tongue, yet deadly to taste\u2014
+A flower that lives by the venom it faced.
+They bleed where they're torn, and quietly cry.
+Some beauty must poison before it can die.
+
+They bloom and they sway, then wither one day;
+Their fragrance is bought, their thorns stripped away.
+They turn all their wounds into perfume and art,
+The poison runs sweet in the veins of the heart.
+
+Yet even when plucked, they refuse to decay:
+Their scent haunts the garden long after the day.
+Beneath all their sweetness, the bitterness grows,
+A truth only one who has tasted it knows.`
+    },
 
     "snezhnaya-deva": {
       title: "Снежная дева", lang: "ru", date: "2024", year: 2024, kind: "Poem",
@@ -112,42 +160,130 @@
 На устах его иней, во взоре — слюда,
 В очах не осталось живого следа.
 Он в холоде вечном нашёл свой конец:
-Кто зиму полюбит — тот точно мертвец.
+Кто зиму полюбит — тот точно мертвец.`,
+      mt:
+`Hush now… hush…
+Do you hear my whisper?..
+Stillness in the wilds,
+the forest stands unmoving…
+Don't just stand there…
+Come closer to me…
+I won't touch you…
+as long as you breathe…
 
-тише… тише…
-шёпот мой слышишь…
+Since your young years, surely, you were taught:
+if you yield to Winter, you ruin your soul —
+she'll lure you into the wilds, bewitch you,
+and spellbind you with an eternal cold.
+Or is the rumor true that runs among folk:
+that it goes badly for those who meet me?
 
-кто зиму полюбит…
-тот точно мертвец…
+Or is meeting me a great wonder?..
 
-тише… тише…
-иди ко мне ближе…
+Neither living nor dead is this snow maiden,
+her shroud was woven to the blizzard's tunes.
+On her lips is hoarfrost, in her gaze — mica,
+in her eyes a mute water stiffens.
+On her brow, a coif of snowy lace,
+whiter than grave-clothes, like the dead.
+Not for nothing the rumor runs among folk:
+that death lies hidden in her words.
 
-кто зиму полюбит…
-тот точно мертвец…
+You're a bold youth, of sturdy build,
+I'll share with you my own wisdom:
+do you see, off in the distance, the rowan grows?
+It gives away a magic power.
+There, scarlet clusters hang from the boughs,
+they'll guard you from cruel frosts and spells.
+Tear off a couple of branches and make a wreath,
+set it on your brow — it will do you good.
+And weave it so that it fits you just right,
+and in an instant you'll go deaf to my call…
 
-тише… тише…
-шёпот мой слышишь…`
+To believe, or not? Decide for yourself now,
+in this world a deception lies in wait for us all…
+Is the rumor true that runs among folk?
+That it goes badly for those who meet me?..
+
+Or is meeting me a great wonder?..
+
+Neither living nor dead is this snow maiden,
+her shroud was woven to the blizzard's tunes.
+On her lips is hoarfrost, in her gaze — mica,
+in her eyes a mute water stiffens.
+On her brow, a coif of snowy lace,
+whiter than grave-clothes, like the dead.
+Not for nothing the rumor runs among folk:
+that death lies hidden in her words.
+
+He steps toward the tree, and with the crunch of his tread
+the whisper of the snows grows louder still:
+"Don't touch the white snow with a bare hand —
+it burns like a nettle, with a frosty needle.
+It will shackle your veins and take your breath,
+and bear off what's in your chest along with the warmth.
+
+But maybe it isn't I who lure you now,
+but your own heart, that has given itself to sleep…"
+
+Neither living nor dead is this snowy youth,
+in his stiffened hands — a rowan crown.
+Uncrowned by it, he froze at last,
+locked by the snow in a frosty casket.
+On his lips is hoarfrost, in his gaze — mica,
+in his eyes no living trace remains.
+In the eternal cold he found his end:
+whoever falls in love with winter is surely a dead man.`
     },
 
     "moonlit-road": {
       title: "Moonlit Road", lang: "en", date: "January 2024", year: 2024, kind: "Poem",
-      note: "On a usual commute to university, accompanied by the big yellow moon and the yellow lines on the road, my playlist shuffled to “Yellow” by Coldplay. I listened once, then twice… eventually, this poem was born.",
+      note: "On a usual commute to university, accompanied by the big yellow moon and the yellow lines on the road, my playlist shuffled to “Yellow” by Coldplay. I listened once, then twice… eventually, this poem was born. The whispered lines are the moon’s echo — read past them and the poem still stands on its own.",
       text:
+`The highway's double yellow lines—
+> Familiar.
+The moon above the green road signs—
+> You see her.
+Her dazzling golden gaze calls out,
+> “You're like me.”
+Her lonely coldness makes you doubt—
+> Unlikely.
+
+She's your companion as you drive—
+> Appealing.
+This late ride makes you feel alive:
+> So freeing.
+You try to find the light of stars.
+> They're not there.
+You're blinded by the beams of cars.
+> They don't care.
+
+You start to play same songs again.
+> You get chills
+Why suddenly you feel this pain?
+> You fight tears.
+It's not from sorrow, it's not sad,
+> Not bitter
+You realize what's left unsaid
+> ||You're a quitter||`,
+      also: [{
+        label: "The same road, without the moon's echoes",
+        text:
 `The highway's double yellow lines,
 The moon above the green road signs,
 Her dazzling golden gaze calls out,
 Her lonely coldness makes you doubt.
 
-She's your companion as you drive.
+She's your companion as you drive,
 This late ride makes you feel alive.
-You search the sky to see the stars.
+You try to find the light of stars,
 You're blinded by the beams of cars.
 
 You start to play same songs again.
-Why do you feel this throbbing pain?
-It's not a sorrow. It's not sad,
-Realization drives you mad—`
+Why suddenly you feel this pain?
+It's not from sorrow, it's not sad,
+You realize what's left unsaid…`
+      }]
     },
 
     "eyes-of-stars": {
@@ -166,7 +302,8 @@ They reflect in the depths of your eyes.`
     },
 
     "moy-may": {
-      title: "Мой Май", lang: "mixed", date: "May 2024", year: 2024, kind: "Poem",
+      title: "Мой Май", lang: "ru", date: "May 2024", year: 2024, kind: "Poem",
+      related: [{ label: "My May (English translation)", slug: "my-may" }],
       text:
 `Чем пахнет май? Он пахнет детством,
 Тем свежим воздухом, наполненным цветами.
@@ -181,24 +318,54 @@ They reflect in the depths of your eyes.`
 Мне пахнет тем ушедшим маем,
 В котором, тогда ещё не зная,
 Настал последний день,
-Когда в руках держала я сирень.`,
-      also: [{
-        label: "English — “My May”",
-        text:
-`What does May smell like? Like childhood near,
-Fresh air, soft winds, and flowers drawing near.
-Like lilac trees that bloomed by my old school,
-And dreams that bloomed in me when I was small.
+Когда в руках держала я сирень.`
+    },
+
+    "my-may": {
+      title: "My May", lang: "en", date: "May 2024", year: 2024, kind: "Translation", xlation: "from Russian",
+      note: "My English translation of the Russian “Мой Май.”",
+      related: [{ label: "Мой Май (Russian original)", slug: "moy-may" }],
+      text:
+`What May smells like? Like childhood did:
+Fresh air, soft breeze, and you're a kid.
+Like lilac flowers by the wall,
+Like dreams that bloomed when I was small.
 
 What does May smell like now? I cannot tell.
 I see the cherry blossoms, pink and pale.
-Acacia's taste still lingers on my tongue—
-But deep inside, a yearning's never gone.
+Acacia's taste still lingers on my tongue,
+And deep inside, a yearning's never gone.
 
-I miss the May I used to know so well—
-When I, not knowing, bid it one farewell:
+I miss the May that's frozen in my mind,
+The one that now forever has entwined
 The final day I held in both my hands
 A branch of lilac from my southern lands.`
+    },
+
+    "pushkin-georgia": {
+      title: "On the Hills of Georgia", lang: "en", date: "2026", year: 2026, kind: "Translation", xlation: "after Pushkin",
+      note: "My English translation of Alexander Pushkin’s «На холмах Грузии лежит ночная мгла…» (1829) — not my own poem, but my rendering of his. I kept his iambic structure (hexameter on the odd lines, tetrameter on the even) and his ABABCDCD rhyme. Read “burn” and “learn” so they rhyme.",
+      related: [{ label: "More translations", slug: "my-may" }],
+      text:
+`The shroud of night abides on Georgian hills before me,
+Aragvi roars amidst this murk.
+I grieve and yet feel free — my sadness soaring,
+Your image in this sorrow's left to lurk.
+You, only you... and nothing of my sorrow gives me pain,
+No torment stings, no shadows burn.
+My heart burns bright and loves anew, and this alone is plain:
+to cease from love, it cannot learn.`,
+      also: [{
+        label: "Александр Пушкин — оригинал (1829)",
+        text:
+`На холмах Грузии лежит ночная мгла;
+Шумит Арагва предо мною.
+Мне грустно и легко; печаль моя светла;
+Печаль моя полна тобою,
+Тобой, одной тобой... Унынья моего
+Ничто не мучит, не тревожит,
+И сердце вновь горит и любит — оттого,
+Что не любить оно не может.`
       }]
     },
 
@@ -206,7 +373,7 @@ A branch of lilac from my southern lands.`
       title: "730 Дней", lang: "ru", date: "February 2024", year: 2024, kind: "Poem",
       text:
 `Два года — семьсот тридцать дней
-(без високосных февралей)?
+(без високосных февралей).
 Два лета, осени, зимы
 И две цветущие весны.
 
@@ -218,7 +385,22 @@ A branch of lilac from my southern lands.`
 Два года — то не просто дата,
 То жизней горькая утрата,
 Два лета, осени, зимы
-И две кровавые весны.`
+И две **кровавые** весны.`,
+      mt:
+`Two years — seven hundred and thirty days
+(no leap-year Februaries counted).
+Two summers, autumns, winters passed,
+and two springs in full, clear bloom.
+
+Two years — and thousands of souls
+(from the elderly down to the children),
+who, after the cold of winter,
+will never feel the coming of spring.
+
+Two years — this is no simple date,
+but a bitter loss of lives:
+two summers, autumns, winters,
+and two springs that ran with **blood**.`
     },
 
     "heartbreak": {
@@ -306,7 +488,7 @@ Before there came another blow.`
     },
 
     "umirayushchiy-soldat": {
-      title: "Умирающий Солдат", lang: "ru", date: "April 2022", year: 2022, kind: "Poem",
+      title: "Умирающий Солдат", lang: "ru", date: "April 2022", year: 2022, kind: "Translation", xlation: "from English",
       note: "A translation of “Dying Soldier.” It also has a song version with chords, and three stanzas rendered in Ukrainian.",
       related: [{ label: "Dying Soldier (English original)", slug: "dying-soldier" }],
       text:
@@ -377,10 +559,14 @@ Before there came another blow.`
 Але не чую більше криків ближча —
 Не дихають — ось все они мертві.
 
+✧ ✦ ✧
+
 Я бачу смерті скорботне обличчя,
 Під гуркіт зараз чую дихання її,
 Давно немає більше криків ближча.
 І також зникли зітхання мої.
+
+✧ ✦ ✧
 
 Я бачив смерті скорботне обличчя,
 Нарешті ось відчув, я її руки.
@@ -390,7 +576,7 @@ Before there came another blow.`
     },
 
     "infinity": {
-      title: "Infinity", lang: "en", date: "November 2023", year: 2023, kind: "Poem",
+      title: "Infinity", lang: "en", date: "November 2023", year: 2023, kind: "Translation", xlation: "from Russian",
       note: "A freer translation of the Russian “Бесконечность.” A closer one is “I Can See the Infinity.”",
       related: [{ label: "Бесконечность (Russian)", slug: "beskonechnost" }, { label: "I Can See the Infinity", slug: "i-can-see-the-infinity" }],
       text:
@@ -398,7 +584,6 @@ Before there came another blow.`
 By infinity's call.
 This cruel world can't be cured,
 Human life is so small.
-
 I stare in from the top
 Of abyss' endless gates.
 Taking terminal stop
@@ -406,7 +591,7 @@ Where eternity waits.`
     },
 
     "i-can-see-the-infinity": {
-      title: "I Can See the Infinity", lang: "en", date: "November 2023", year: 2023, kind: "Poem",
+      title: "I Can See the Infinity", lang: "en", date: "November 2023", year: 2023, kind: "Translation", xlation: "from Russian",
       note: "A closer translation of the Russian “Бесконечность.” A freer one is “Infinity.”",
       related: [{ label: "Бесконечность (Russian)", slug: "beskonechnost" }, { label: "Infinity", slug: "infinity" }],
       text:
@@ -456,7 +641,27 @@ Reaching out for eternal.`
 Найдётся ли где-нибудь место
 На этой земле, где я буду невестой,
 Где как в зеркале улыбка твоя
-Будет также сиять как моя?`
+Будет также сиять как моя?`,
+      mt:
+`Is there, somewhere, a place to be found
+on this earth, where I will be a bride,
+where I'll be led beneath the wreath,
+where I'll catch the glint of two rings?
+
+Will there be someone brave enough,
+for whose sake I would gladly put on,
+smiling, the white of the dress —
+someone to whom I'm not a mistake?
+
+Will there ever come a time
+when that heavy burden lifts —
+the thought that I won't be loved,
+the thought that, year by year, destroys me?
+
+Is there, somewhere, a place to be found
+on this earth, where I will be a bride,
+where, as in a mirror, your smile
+will shine as brightly as my own?`
     },
 
     "odinochestvo": {
@@ -509,6 +714,54 @@ Reaching out for eternal.`
 О пророчестве,
 То что с отрочества
 Непрестанно гласит: «Одиночество.»`,
+      mt:
+`Since girlhood,
+that prophecy
+forever intoning: “Solitude” —
+let it not come true,
+let it be forgotten
+like a nightmare of a fragile soul.
+
+A soul that wept,
+that quietly prayed
+and begged its way out of its own cage,
+to risk a life,
+to let itself grow strong
+and not go blind from its own tears.
+
+In the solitude
+she was suffocating,
+renouncing her own humanity —
+like a doll
+with a birth defect,
+but, alas, with a human mind.
+
+She knew
+that, thinking so,
+she might be her own worst enemy.
+But to be abandoned
+was more frightening,
+and to her humanity, more painful still.
+
+Her heart —
+a vessel of glass.
+Her hands keep it safe.
+But on the shards
+of the shattered glass
+she scraped her hands against the splinters.
+
+And in her own blood,
+trembling with pain,
+she gathered a stained-glass pattern
+from the fragments of a broken heart,
+all the while watching the shut door.
+
+Pleadingly,
+with a wandering gaze,
+she whispered, heart-rendingly,
+of the prophecy
+that since girlhood
+forever intones: “Solitude.”`,
       also: [{
         label: "Alternate ending",
         text:
@@ -540,19 +793,26 @@ Reaching out for eternal.`
 Я хочу эту стойкость
 Словно супер-способность.
 Неужель не стать стойкой
-Вплоть до предсмертной койки?`
+Вплоть до предсмертной койки?`,
+      mt:
+`I would like steadfastness,
+in spite of my timidity.
+I would like, steadfastly,
+to hold my head up boldly.
+I want this steadfastness
+like a kind of superpower.
+Can I really not grow steadfast,
+right up to the deathbed?`
     },
 
     "koshmar": {
       title: "Кошмар 24-ого", lang: "ru", date: "February 2023", year: 2023, kind: "Poem",
-      note: "A condensed English rendering, “Nightmare of the 24th,” also exists.",
       text:
 `Кошмаром все казалось год назад
 Тогда, в ту ночь, мне верить не хотелось,
 Что где-то там всё небо загорелось.
 И среди слез и всхлипов невпопад
 Я представляла себе взрывов град.
-
 Шептала, повторяла все одно:
 Пролиты буду реки горьких слез,
 Но верю, все пройдет до летних гроз.
@@ -562,7 +822,6 @@ Reaching out for eternal.`
 И душит их блокада оков ржавых.
 Всей силой их стремятся извести,
 И кажется, их больше не спасти…
-
 Но в майские те дни молилась также.
 Была уверена, злодеям хватит толку
 Глаза свои открыть. И взрывы смолкнут.
@@ -572,7 +831,6 @@ Reaching out for eternal.`
 А кто-то был без крыши под дождями,
 Боясь прихода похоронного письма.
 Людские жизни поглощала тьма.
-
 И сколько же людей уже в могиле?
 Прошу Господь, о дай освобожденье!
 С надеждой верю, остановишь преступленье.
@@ -582,7 +840,6 @@ Reaching out for eternal.`
 И вражья алчность также кровожадна.
 Но вера в лучшее меня не покидала.
 Я по ночам молитвы все шептала.
-
 Доколе будет эхом слышен плач
 Что издают в ночи отец и мать?
 Их детям взрослыми уже не стать.
@@ -592,7 +849,6 @@ Reaching out for eternal.`
 Всё также жизни резко прекращает.
 И враг с косою ходит бесконтрольно,
 Он продолжает убивать всех добровольно.
-
 Бездетна мать теперь, жена — вдова.
 И режет душу детских уст ответ,
 Что дрогнув скажут: «Мамы больше нет».
@@ -602,14 +858,67 @@ Reaching out for eternal.`
 Что столько дней захватит небо мгла,
 Что продолжать будут немыслимый захват,
 Что целый год продлится этот ад
-
 Февраль. Двадцать четвертое число.
 И задыхаюсь я от слёз, еле дыша.
-О как же сильно ты болишь, моя душа!`
+О как же сильно ты болишь, моя душа!`,
+      mt:
+`It all seemed a nightmare a year ago —
+that night, I did not want to believe
+that somewhere out there the whole sky had caught fire.
+And amid the tears and the ragged sobs
+I pictured to myself a hail of blasts.
+I whispered, repeating the same refrain:
+rivers of bitter tears will be spilled,
+but I believe it will pass before the summer storms.
+
+Spring came; the flowers are meant to bloom,
+but streams of bloody rivers ruin them,
+and a blockade of rusted shackles chokes them.
+With all their might they strive to wipe them out,
+and it seems there is no saving them now…
+Yet in those May days I prayed all the same.
+I was sure the villains would have the sense
+to open their eyes. And the blasts would fall silent.
+
+But in the summer, too, the houses crumbled,
+and people sat for days without water,
+and some were roofless under the rains,
+dreading the coming of a funeral letter.
+The dark devoured human lives.
+And how many people are already in the grave?
+I beg You, Lord, oh grant deliverance!
+With hope I believe You will halt the crime.
+
+Autumn came. The sky was ablaze.
+The iron rain beat just as mercilessly.
+And the enemy's greed is just as bloodthirsty.
+But faith in the better did not leave me.
+By night I whispered all my prayers.
+How long will the weeping be heard as an echo
+that a father and mother let out in the night?
+Their children will never grow up now.
+
+Winter. How bitter, how cold, how it hurts.
+War lays the hearts of people waste,
+and just as sharply cuts lives short.
+And the enemy with his scythe walks unchecked,
+he goes on killing everyone, freely.
+The mother is childless now; the wife — a widow.
+And the answer from children's lips cuts the soul,
+the one they'll say, faltering: "Mama is gone."
+
+It all seemed a nightmare a year ago —
+that night, I could not believe
+that the murk would seize the sky for so many days,
+that they would go on with the unthinkable seizure,
+that this hell would last a whole year.
+February. The twenty-fourth.
+And I am choking on tears, barely breathing.
+Oh, how fiercely you ache, my soul!`
     },
 
     "self-love": {
-      title: "Self-Love", lang: "en", date: "July 2019", year: 2019, kind: "Poem",
+      title: "Loathe to Love", lang: "en", date: "July 2019", year: 2019, kind: "Poem",
       text:
 `It's hard to learn to love yourself
 When people always put you down.
@@ -654,16 +963,16 @@ And they will wait for you to bloom!`
       title: "Proverbs 18:2", lang: "en", date: "July 2023", year: 2023, kind: "Poem",
       note: "An absurdist metaphor meant to pass a message, passively, to someone who behaved like a fool. Too bad they probably won't get that.",
       text:
-`Pine trees were standing in the snow
-Right in the middle of July—
-Oh, wait, that's not how it should go!
-Viewpoint my was in the sky.
-
-Ending my gaze up on a cloud.
-Right now I'm thinking the math through
-Because it is, without a doubt,
-Such simple fraction,
-18:2`
+`**P**ine trees were standing in the snow
+**R**ight in the middle of July—
+**O**h, wait, that's not how it should go!
+**V**iewpoint my was in the sky.
+**E**nding my gaze up on a cloud.
+**R**ight now I'm thinking the math through
+**B**ecause it is, without a doubt,
+**S**uch simple fraction,
+**18** by
+**2**`
     },
 
     "gorit-zvezda": {
@@ -717,7 +1026,57 @@ Such simple fraction,
 И происходит так с людьми:
 Одни в жизнь Вечную идут,
 Другие в царство вечной тьмы —
-Туда, какой путь изберут.`
+Туда, какой путь изберут.`,
+      mt:
+`A star is burning. The star is alone.
+Its end is coming soon.
+A star is burning. The star is pale —
+for so the Creator willed.
+
+Nothing is eternal under the moon,
+nothing — beneath the stars at night.
+The world does not rule its own fate,
+like the light of a candle put out.
+
+The star burns for the final time,
+the final hour, the final instant.
+And beyond — the dark of shut eyes.
+The star's face shines no more.
+
+Breathing out its final breath,
+it longed to turn it all back,
+and, calling on the name of God,
+it cried out something astray.
+
+But too late — nothing can be changed,
+and for our sins the reckoning comes.
+For every moment we should give thanks,
+for in our sufferings we're to blame.
+
+Some live only by the Covenant;
+others — foul, pitiful, false.
+Some, like stars, are children of light.
+Others gutter out in shame.
+
+And the stars dim, and the stars burn:
+some live on, being reborn,
+living, giving ever more light;
+others perish, led astray.
+
+They live, and they bring death,
+they blacken and carry woe,
+and they wound their own heart,
+binding their fate to sin.
+
+A black hole. The hole is black —
+a riddle, a secret, death.
+A black hole. The hole is dark.
+It will burn no more.
+
+And so it goes with people too:
+some pass into Life Eternal,
+others into the realm of endless dark —
+there, by whichever path they choose.`
     },
 
     "glubina": {
@@ -736,7 +1095,22 @@ Such simple fraction,
 Она коварна, беспощадна.
 И ведь не рядом, далека.
 Тиха, прекрасна, ненаглядна
-И в то же время так близка.`
+И в то же время так близка.`,
+      mt:
+`The deep: stillness, and the sea.
+The deep: loss, and grief.
+The deep — the riddle of the age,
+and the end of a human life.
+
+Unfathomable to me,
+and boundless to you.
+It drowns you, then forgets,
+and goes to seek another prey.
+
+It is treacherous, merciless,
+and not near — it is far away.
+Quiet, lovely, beyond looking away,
+and at the very same time, so close.`
     },
 
     "chego-ty-zhdyosh": {
@@ -749,15 +1123,25 @@ Such simple fraction,
 И никому,
 На сердце что, не говоришь.
 Тебе уже понять нельзя,
-Что жизнь закончилась не зря.`
+Что жизнь закончилась не зря.`,
+      mt:
+`What are you waiting for? Where do you run?
+What for? From where? And why?
+You hurry to forget the whole past,
+you stand in silence,
+and to no one
+do you speak of what's on your heart.
+It is no longer yours to understand
+that life has ended not in vain.`
     }
 
   };
 
   window.POEM_ORDER = [
-    "snezhnaya-deva", "moonlit-road", "eyes-of-stars", "moy-may", "730-dney",
+    "weavers-demise", "garden-lit-in-red",
+    "snezhnaya-deva", "moonlit-road", "eyes-of-stars", "moy-may", "my-may", "730-dney",
     "heartbreak", "dying-soldier", "umirayushchiy-soldat", "infinity", "i-can-see-the-infinity",
     "beskonechnost", "nevesta", "odinochestvo", "stoykost", "koshmar",
-    "self-love", "proverbs", "gorit-zvezda", "glubina", "chego-ty-zhdyosh"
+    "self-love", "proverbs", "pushkin-georgia", "gorit-zvezda", "glubina", "chego-ty-zhdyosh"
   ];
 })();

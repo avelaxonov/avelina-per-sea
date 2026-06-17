@@ -112,7 +112,7 @@
 <footer class="site-foot">
   <div class="wrap">
     <div class="foot-brand-row">
-      <img class="foot-logo" src="assets/logo.png" alt="Avelina, per sea logo" />
+      <img loading="lazy" decoding="async" class="foot-logo" src="assets/logo.png" alt="Avelina, per sea logo" />
       <div>
         <div class="foot-brand">Avelina<span class="comma">,</span> per sea</div>
         <div class="foot-tag">Sensor and sensibility.</div>
@@ -128,6 +128,7 @@
 </footer>
 
 <script src="assets/site.js"></script>
+<script src="assets/game.js"></script>
 <script>
 var PROJECTS = {
   "balistes": {
@@ -338,7 +339,7 @@ var PROJECTS = {
   }
 
   document.getElementById('pGallery').innerHTML = d.media.map(function (m) {
-    if (m.src) return '<div class="imgframe" data-lightbox="' + m.src + '" data-caption="' + (m.cap || '') + '"><img src="' + m.src + '" alt="' + (m.cap || '') + '"></div>';
+    if (m.src) return '<div class="imgframe" data-lightbox="' + m.src + '" data-caption="' + (m.cap || '') + '"><img loading="lazy" decoding="async" src="' + m.src + '" alt="' + (m.cap || '') + '"></div>';
     return '<div class="photo-ph"><span class="ph-label">' + m.ph + '</span></div>';
   }).join('');
 

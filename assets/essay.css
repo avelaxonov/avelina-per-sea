@@ -1,0 +1,78 @@
+/* ============================================================
+   Weaver's Cradle — academic essay / thesis reading pages
+   Shared by essay-*.html. Loads after site.css.
+   ============================================================ */
+.es-hero { padding-top: 108px; position: relative; overflow: hidden; }
+.es-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(110% 75% at 84% 0%, rgba(196,154,90,0.12), transparent 55%); pointer-events: none; }
+.read { max-width: 720px; margin: 0 auto; padding: 0 var(--gutter); position: relative; z-index: 1; }
+.es-back { margin-bottom: 2.2rem; }
+.es-kicker { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--amber); }
+.es-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.02; letter-spacing: -0.025em; color: var(--text-light); margin: 0.7rem 0 0.5rem; text-wrap: balance; }
+.es-sub { font-family: var(--font-serif); font-style: italic; font-size: clamp(1.05rem, 2.2vw, 1.45rem); line-height: 1.4; color: var(--pale); text-wrap: pretty; max-width: 36ch; }
+.es-sub em { font-style: italic; color: var(--amber); }
+
+/* meta card: field / advisor / date / institution */
+.es-meta { margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--pale-dim); border: 1px solid var(--pale-dim); border-radius: 5px; overflow: hidden; }
+.es-meta div { background: var(--deep-sea); padding: 0.9rem 1.1rem; }
+.es-meta dt { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); }
+.es-meta dd { font-size: 0.92rem; color: var(--text-light); margin-top: 0.3rem; line-height: 1.35; }
+
+.es-rule { max-width: 720px; margin: 2.4rem auto; padding: 0 var(--gutter); }
+.es-rule .line { height: 1px; background: var(--pale-dim); position: relative; }
+.es-rule .line::after { content: ""; position: absolute; left: 0; top: -3px; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); opacity: 0.7; }
+
+/* abstract */
+.es-abstract { margin-top: 0.4rem; }
+.es-abstract .es-ab-label { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 1rem; }
+.es-abstract p { font-family: var(--font-serif); font-style: italic; font-size: clamp(1.02rem, 1.6vw, 1.12rem); line-height: 1.75; color: #DCE6E4; margin: 0 0 1.1rem; text-align: justify; text-justify: inter-word; -webkit-hyphens: auto; hyphens: auto; }
+.es-abstract em { color: var(--text-light); }
+
+/* body */
+.es-body { padding-bottom: 1rem; }
+.es-body h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.4rem, 3vw, 1.95rem); color: var(--text-light); letter-spacing: -0.015em; margin: 2.8rem 0 1.2rem; line-height: 1.15; }
+.es-body h2 .es-num { color: var(--amber); font-weight: 800; margin-right: 0.5rem; }
+.es-body h2:first-child { margin-top: 0; }
+.es-body p { font-family: var(--font-serif); font-weight: 400; font-size: clamp(1.02rem, 1.5vw, 1.12rem); line-height: 1.82; color: #DCE6E4; margin: 0 0 1.3rem; text-wrap: pretty; text-align: justify; text-justify: inter-word; -webkit-hyphens: auto; hyphens: auto; }
+.es-body p.lead::first-letter { font-family: var(--font-display); font-weight: 700; font-size: 3.2em; line-height: 0.74; float: left; padding: 0.08em 0.12em 0 0; color: var(--amber); }
+.es-body em, .es-body i { font-style: italic; }
+.es-body em.work { font-style: italic; color: #E8DCC2; }
+
+/* notes + works cited */
+.es-apparatus { margin-top: 3rem; padding-top: 1.8rem; border-top: 1px solid var(--pale-dim); }
+.es-apparatus h3 { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.1rem; }
+.es-notes { counter-reset: none; list-style: none; }
+.es-notes li { display: grid; grid-template-columns: 2rem 1fr; gap: 0.6rem; font-family: var(--font-body); font-size: 0.82rem; line-height: 1.6; color: var(--pale); margin-bottom: 0.7rem; }
+.es-notes li .es-n { font-family: var(--font-mono); font-size: 0.72rem; color: var(--amber); text-align: right; }
+.es-wc { list-style: none; }
+.es-wc li { font-family: var(--font-body); font-size: 0.85rem; line-height: 1.6; color: var(--pale); margin-bottom: 0.9rem; padding-left: 1.6rem; text-indent: -1.6rem; }
+.es-wc li em, .es-notes li em { font-style: italic; color: #cfe0de; }
+.es-apparatus a { color: var(--aqua); word-break: break-word; }
+.es-apparatus a:hover { color: var(--aqua-bright); }
+
+/* footer nav between the two theses */
+.es-foot { max-width: 720px; margin: 3.4rem auto 0; padding: 2rem var(--gutter) 0; border-top: 1px solid var(--pale-dim); display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.es-foot a { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.05em; color: var(--pale); transition: color 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; }
+.es-foot a:hover { color: var(--amber); }
+.es-foot .es-lib { color: var(--amber); }
+.es-companion { max-width: 720px; margin: 2.4rem auto 0; padding: 0 var(--gutter); }
+.es-companion a { display: block; border: 1px solid var(--pale-dim); border-radius: 6px; padding: 1.2rem 1.4rem; transition: border-color 0.25s, background 0.25s, transform 0.25s; background: rgba(168,206,206,0.03); }
+.es-companion a:hover { border-color: var(--amber); background: rgba(196,154,90,0.05); transform: translateY(-3px); }
+.es-companion .es-c-label { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); }
+.es-companion .es-c-title { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; color: var(--text-light); margin-top: 0.4rem; }
+.es-companion .es-c-title em { font-style: italic; color: var(--amber); }
+.es-companion .es-c-sub { font-size: 0.9rem; color: var(--pale); margin-top: 0.3rem; }
+.nav-logo .ce { font-style: normal; color: var(--aqua); }
+
+/* footnotes — inline markers + hover/click tooltip + notes list */
+.fn { font-family: var(--font-mono); font-size: 0.62em; font-weight: 600; color: var(--aqua); cursor: pointer; padding: 0 0.12em; vertical-align: super; line-height: 0; border-radius: 3px; transition: color 0.15s, background 0.15s; }
+.fn:hover, .fn:focus { color: var(--aqua-bright); background: rgba(107,191,190,0.16); outline: none; }
+.fn-tip { position: fixed; z-index: 300; max-width: min(360px, 86vw); background: #0c2226; color: #DCE6E4; border: 1px solid var(--pale-dim); border-radius: 8px; padding: 0.8rem 0.95rem; font-family: var(--font-body); font-size: 0.82rem; line-height: 1.55; box-shadow: 0 18px 44px -16px rgba(0,0,0,0.72); opacity: 0; transform: translateY(4px); transition: opacity 0.16s, transform 0.16s; pointer-events: none; }
+.fn-tip.show { opacity: 1; transform: none; pointer-events: auto; }
+.fn-tip a { color: var(--aqua); word-break: break-word; }
+.fn-tip em { font-style: italic; color: #cfe0de; }
+.es-notes-wrap { margin-top: 2.6rem; }
+.es-notes { list-style: none; padding: 0; margin: 1.1rem 0 0; }
+.es-notes li { font-family: var(--font-body); font-size: 0.8rem; line-height: 1.6; color: var(--pale); margin-bottom: 0.7rem; padding-left: 1.7rem; text-indent: -1.7rem; scroll-margin-top: 90px; }
+.es-notes .fn-bk { font-family: var(--font-mono); font-size: 0.72rem; color: var(--amber); margin-right: 0.4rem; }
+.es-notes li em { font-style: italic; color: #cfe0de; }
+.es-notes a { color: var(--aqua); word-break: break-word; }
