@@ -39,6 +39,13 @@
 .p-gallery .imgframe, .p-gallery .photo-ph { aspect-ratio: 4/3; border-radius: 5px; overflow: hidden; cursor: pointer; }
 .p-gallery .imgframe img { transition: transform 0.5s var(--ease-out); }
 .p-gallery .imgframe:hover img { transform: scale(1.05); }
+.p-figures { display: grid; gap: 1.4rem; margin-top: 1.5rem; }
+.p-figure { border: 1px solid var(--pale-dim); border-radius: 7px; overflow: hidden; background: var(--deep-sea-2); cursor: pointer; transition: border-color 0.25s, transform 0.25s; }
+.p-figure:hover { border-color: var(--aqua); transform: translateY(-2px); }
+.p-figimg { background: #fff; }
+.p-figimg img { width: 100%; display: block; }
+.p-figcap { font-family: var(--font-mono); font-size: 0.74rem; line-height: 1.55; letter-spacing: 0.01em; color: var(--pale); padding: 0.75rem 1rem; }
+.p-figcap b { color: var(--aqua); font-weight: 600; }
 .p-pun { font-family: var(--font-display); font-style: italic; font-size: 1.4rem; color: var(--amber); opacity: 0.8; margin-top: 3rem; }
 .p-foot-nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
 #pCodeWrap:not(:empty) { margin-top: 2.6rem; }
@@ -87,7 +94,9 @@
         <div id="pOverview"></div>
         <h3 class="p-h3" id="pHighlightsTitle" style="display:none;">Highlights</h3>
         <ul class="p-list" id="pHighlights"></ul>
-        <h3 class="p-h3">Documentation</h3>
+        <h3 class="p-h3" id="pFiguresTitle" style="display:none;">Figures</h3>
+        <div class="p-figures" id="pFigures"></div>
+        <h3 class="p-h3" id="pDocTitle">Documentation</h3>
         <div class="p-gallery" id="pGallery"></div>
         <div id="pPaper"></div>
         <div id="pCodeWrap"></div>
@@ -218,14 +227,35 @@ var PROJECTS = {
   "crepusculum": {
     genus: "Crepusculum — Latin for twilight",
     title: "Crepusculum",
-    tagline: "Independent study project.",
-    badges: [["Independent study","live"]],
-    overview: ["<em>[Owner to add description — what the independent study explored, and why \u201Ctwilight.\u201D]</em>"],
-    highlights: ["Independent study","<em>[Owner: add highlights]</em>"],
-    specs: [["Type","Independent study"],["Status","[Owner to add]"]],
-    media: [{ph:"[ PHOTO ]"},{ph:"[ PHOTO ]"},{ph:"[ PHOTO ]"}],
-    links: [],
-    pun: ""
+    tagline: "Twilight on the reef — a crepuscular fish-activity study at Lighthouse Reef Atoll, Belize.",
+    badges: [["Independent study","live"],["ENV 391 · Belize",""],["Field study · 2026",""]],
+    overview: [
+      "Crepusculum is an independent field study — ENV 391, run alongside the BIO 311 coral-reef ecology expedition — of <b>crepuscular</b> fish activity: the brief windows around dawn and dusk when a reef's daytime and nighttime communities overlap. The name is the Latin word for twilight. I deployed a stationary underwater camera on a patch reef at Half Moon Caye, Lighthouse Reef Atoll, Belize, at roughly 1.5&nbsp;m depth, across a pre-dawn and a pre-dusk session on the same day.",
+      "Twelve hours apart, the same reef read as two different places. At dusk, fish were present in <em>every single sampled minute</em> — 1,243 observations across 37 species, led by schoolmaster snapper, blue tang, and sergeant major. Before dawn, the same patch produced just 166 observations across four confirmed species, almost entirely nocturnal squirrelfish and crepuscular French grunt. It is a clean case of diel niche partitioning: one structure serving different communities by the hour.",
+      "Dusk was sampled one photograph per minute; the pre-dawn session was logged from about 1.5 hours of continuous low-light video, reviewed frame by frame in near-total darkness — so every pre-dawn count is a minimum estimate. From the tallies I derived occurrence probability, mean count per minute, species richness, and Shannon diversity (H\u2032). A reef that sustains both a working day shift and a working night shift has the structural complexity to support full 24-hour cycling — exactly what a daytime-only biodiversity survey would miss."
+    ],
+    highlights: [
+      "Stationary underwater camera on a patch reef at ~1.5 m, Half Moon Caye, Belize",
+      "Two crepuscular sessions on one day — pre-dawn (~5\u20137 AM) and pre-dusk (~4\u20136 PM)",
+      "1,243 fish / 37 species at dusk against 166 fish / 4 species before dawn — a 7.5\u00d7 gap",
+      "Dusk reef held continuous fish presence in every sampled minute (P = 1.0)",
+      "Near-complete community turnover between sessions — diel niche partitioning across trophic roles",
+      "Metrics derived: occurrence probability, mean count, richness, and Shannon H\u2032",
+      "Behavioral notes — a squid hunting silversides at dawn, a barracuda shadowing a snapper school at dusk, rainbow parrotfish crossing the lens"
+    ],
+    specs: [["Type","Independent study"],["Course","ENV 391-SA"],["Site","Half Moon Caye, Belize"],["Depth","~1.5 m"],["Sessions","Pre-dawn & pre-dusk"],["Date","March 14, 2026"],["Supervisor","Dr. Miles Silman"]],
+    figures: [
+      {src:"assets/img/crep/totals.png", cap:"Observed totals \u2014 166 fish across 4 species before dawn vs 1,243 across 37 species at dusk."},
+      {src:"assets/img/crep/per-minute.png", cap:"Total fish per minute. The dusk session peaked at 51 fish in a single minute; pre-dawn counts rarely cleared 8. Note the different y-axis scales."},
+      {src:"assets/img/crep/presence.png", cap:"Smoothed probability of fish presence on a shared time axis. Dusk holds near 1.0 throughout; pre-dawn dips in the darkest window, then climbs toward sunrise."},
+      {src:"assets/img/crep/composition.png", cap:"Proportional species composition. Two species carry the pre-dawn reef; the dusk reef spreads across 37."},
+      {src:"assets/img/crep/functional.png", cap:"Functional / trophic groups. Pre-dawn is almost all nocturnal predators and crepuscular foragers; dusk spans herbivores, piscivores, planktivores and invertivores."},
+      {src:"assets/img/crep/richness.png", cap:"Species richness per minute \u2014 a dusk mean of 3.9 against a pre-dawn mean of 0.77."},
+      {src:"assets/img/crep/metrics.png", cap:"Rate and diversity metrics \u2014 occurrence probability, mean count, richness and Shannon H\u2032 \u2014 all higher at dusk."}
+    ],
+    media: [],
+    links: [["Balistes housing \u2192","project.html?p=balistes"]],
+    pun: "Twilight on the reef."
   },
   "plant-system": {
     genus: "Self-Watering Plant System",
@@ -338,10 +368,27 @@ var PROJECTS = {
     }).join('');
   }
 
-  document.getElementById('pGallery').innerHTML = d.media.map(function (m) {
-    if (m.src) return '<div class="imgframe" data-lightbox="' + m.src + '" data-caption="' + (m.cap || '') + '"><img loading="lazy" decoding="async" src="' + m.src + '" alt="' + (m.cap || '') + '"></div>';
-    return '<div class="photo-ph"><span class="ph-label">' + m.ph + '</span></div>';
-  }).join('');
+  // figures (analytical charts shown full-width with captions, e.g. Crepusculum)
+  if (d.figures && d.figures.length) {
+    document.getElementById('pFiguresTitle').style.display = 'block';
+    document.getElementById('pFigures').innerHTML = d.figures.map(function (f, i) {
+      var cap = (f.cap || '').replace(/"/g, '&quot;');
+      return '<figure class="p-figure" data-lightbox="' + f.src + '" data-caption="' + cap + '">' +
+        '<div class="p-figimg"><img loading="lazy" decoding="async" src="' + f.src + '" alt="' + cap + '"></div>' +
+        '<figcaption class="p-figcap"><b>Fig ' + (i + 1) + '.</b> ' + (f.cap || '') + '</figcaption></figure>';
+    }).join('');
+  }
+
+  // documentation gallery (photos / screenshots) — hidden for projects that have none
+  if (d.media && d.media.length) {
+    document.getElementById('pGallery').innerHTML = d.media.map(function (m) {
+      if (m.src) return '<div class="imgframe" data-lightbox="' + m.src + '" data-caption="' + (m.cap || '') + '"><img loading="lazy" decoding="async" src="' + m.src + '" alt="' + (m.cap || '') + '"></div>';
+      return '<div class="photo-ph"><span class="ph-label">' + m.ph + '</span></div>';
+    }).join('');
+  } else {
+    document.getElementById('pDocTitle').style.display = 'none';
+    document.getElementById('pGallery').style.display = 'none';
+  }
 
   document.getElementById('pPun').textContent = d.pun || '';
 

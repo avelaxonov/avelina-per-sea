@@ -36,9 +36,10 @@
         overs: ['the cuttlefish slips away.', 'inked and gone.', 'lost in the blue.', 'she jets off backward.'] };
   var WINMSG = ['not bad at all.', 'a tidy haul.', 'the reef approves.', 'nicely done.', 'one for the logbook.'];
 
-  var overlay, canvas, ctx, scoreEl, bestEl, heartsEl, hint, retry, inkBtn, pauseBtn, sndBtn, ctrlBtn, fireBtn, swatchWrap, raf, last;
+  var overlay, canvas, ctx, scoreEl, bestEl, heartsEl, hint, retry, inkBtn, pauseBtn, sndBtn, ctrlBtn, fireBtn, swatchWrap, joyThumb, raf, last;
   var hero, goods, bads, ink, keys, score, lives, spawnT, badT, playing, paused, dead, started, invuln, cooldown;
   var pointer = { x: W / 2, y: H / 2, active: false };
+  var joy = { active: false, dx: 0, dy: 0 };
   var best = 0, BKEY = CRADLE ? 'perSea.silkBest' : 'perSea.cuttleBest';
   try { best = +(localStorage.getItem(BKEY) || 0) || 0; } catch (e) {}
 
@@ -50,7 +51,7 @@
     s.textContent =
       '.psg-overlay{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;padding:1.2rem;background:rgba(6,18,22,0.82);font-family:"DM Mono",ui-monospace,monospace;}' +
       '.psg-overlay.open{display:flex;}' +
-      '.psg-card{position:relative;background:#0b242a;border:1px solid rgba(120,190,200,0.22);border-radius:14px;padding:1.05rem;box-shadow:0 40px 90px -30px rgba(0,0,0,0.8);max-width:96vw;}' +
+      '.psg-card{position:relative;background:#0b242a;border:1px solid rgba(120,190,200,0.22);border-radius:14px;padding:1.05rem;box-shadow:0 40px 90px -30px rgba(0,0,0,0.8);max-width:96vw;max-height:94vh;overflow-y:auto;}' +
       '.psg-card.cradle{background:#1a0a10;border-color:rgba(203,164,106,0.28);}' +
       '.psg-top{display:flex;align-items:center;justify-content:space-between;gap:0.8rem;margin-bottom:0.55rem;}' +
       '.psg-title{font-family:"Raleway",sans-serif;font-weight:700;font-size:1.02rem;color:#EAF6F5;}' +
@@ -60,8 +61,18 @@
       '.psg-hearts .dead{opacity:0.2;}' +
       '.psg-stage{position:relative;border-radius:9px;overflow:hidden;}' +
       '.psg-stage canvas{display:block;width:' + W + 'px;max-width:100%;height:auto;border-radius:9px;touch-action:none;}' +
-      '.psg-fire{position:absolute;right:10px;bottom:10px;width:54px;height:54px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.35);background:rgba(255,255,255,0.10);color:#fff;font-size:1.1rem;display:none;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent;backdrop-filter:blur(2px);}' +
-      '.psg-fire:active{background:rgba(255,255,255,0.22);}' +
+      '.psg-touch{display:none;align-items:center;justify-content:space-between;gap:1rem;margin-top:0.7rem;}' +
+      '.psg-touch.on{display:flex;}' +
+      '.psg-joy{position:relative;width:118px;height:118px;border-radius:50%;background:rgba(255,255,255,0.05);border:1.5px solid rgba(120,190,200,0.30);touch-action:none;flex-shrink:0;}' +
+      '.psg-card.cradle .psg-joy{border-color:rgba(203,164,106,0.34);}' +
+      '.psg-joy::after{content:"";position:absolute;inset:0;margin:auto;width:5px;height:5px;border-radius:50%;background:rgba(190,220,222,0.5);}' +
+      '.psg-joy-thumb{position:absolute;left:50%;top:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:rgba(107,191,190,0.85);border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,0.45);pointer-events:none;}' +
+      '.psg-card.cradle .psg-joy-thumb{background:rgba(203,164,106,0.9);}' +
+      '.psg-fire{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:88px;height:88px;border-radius:50%;border:2px solid rgba(255,255,255,0.42);background:rgba(107,191,190,0.16);color:#EAF6F5;cursor:pointer;-webkit-tap-highlight-color:transparent;flex-shrink:0;}' +
+      '.psg-card.cradle .psg-fire{background:rgba(203,164,106,0.18);}' +
+      '.psg-fire .pf-ico{font-size:1.5rem;line-height:1;}' +
+      '.psg-fire .pf-txt{font-family:"DM Mono",monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;opacity:0.9;}' +
+      '.psg-fire:active{background:rgba(107,191,190,0.4);transform:scale(0.95);}' +
       '.psg-msg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;text-align:center;color:#EAF6F5;background:rgba(8,22,26,0.74);padding:1.2rem;}' +
       '.psg-msg.hidden{display:none;}' +
       '.psg-msg .big{font-family:"Raleway",sans-serif;font-weight:700;font-size:1.4rem;}' +
@@ -93,10 +104,13 @@
         '<div class="psg-top"><div class="psg-title">' + T.title + '</div>' +
           '<div class="psg-hud"><span class="psg-hearts" id="psg-hearts"></span><span>' + T.good + ' <b id="psg-score">0</b></span><span>best <span id="psg-best">' + best + '</span></span></div></div>' +
         '<div class="psg-stage"><canvas width="' + W + '" height="' + H + '"></canvas>' +
-          '<button class="psg-fire" id="psg-fire" aria-label="ink">\u25C9</button>' +
           '<div class="psg-msg" id="psg-msg"><div class="big" id="psg-big">' + T.name + '</div>' +
           '<ul class="psg-rules" id="psg-rules"></ul><div class="psg-sub" id="psg-sub" style="display:none"></div>' +
           '<button class="psg-btn" id="psg-retry">dive in \u2192</button></div></div>' +
+        '<div class="psg-touch" id="psg-touch">' +
+          '<div class="psg-joy" id="psg-joy"><div class="psg-joy-thumb" id="psg-joy-thumb"></div></div>' +
+          '<button class="psg-fire" id="psg-fire" aria-label="release ' + T.shootWord + '"><span class="pf-ico">\u25C9</span><span class="pf-txt">' + T.shootWord + '</span></button>' +
+        '</div>' +
         '<div class="psg-foot"><div class="psg-tools">' +
           '<button class="psg-ico" id="psg-ctrl" title="controls"></button>' +
           '<button class="psg-ico" id="psg-pause" title="pause (P)">\u275A\u275A</button>' +
@@ -132,16 +146,32 @@
     function toLocal(e) {
       var r = canvas.getBoundingClientRect();
       pointer.x = (e.clientX - r.left) * (W / r.width);
-      // on touch, lift the target above the fingertip so you can see the hero
       pointer.y = (e.clientY - r.top) * (H / r.height) - (coarse ? 46 : 0);
       pointer.active = true;
     }
-    // pointer tracked on document so heading persists past the field edge
-    document.addEventListener('pointermove', function (e) { if (overlay.classList.contains('open') && playing && ctrl === 'cursor') toLocal(e); });
+    // cursor steering is desktop-only; on touch the joystick drives movement
+    document.addEventListener('pointermove', function (e) { if (overlay.classList.contains('open') && playing && ctrl === 'cursor' && !coarse) toLocal(e); });
     canvas.addEventListener('pointerdown', function (e) {
-      if (ctrl === 'cursor') toLocal(e);   // click steers in cursor mode
-      shoot();                              // ...and always fires
+      if (ctrl === 'cursor' && !coarse) toLocal(e);   // click steers in cursor mode (desktop)
+      shoot();                                          // tap the field always fires
     });
+
+    // virtual joystick (touch) — analog movement vector, lives outside the field
+    var joyEl = overlay.querySelector('#psg-joy');
+    joyThumb = overlay.querySelector('#psg-joy-thumb');
+    function joyMove(e) {
+      var r = joyEl.getBoundingClientRect();
+      var max = r.width / 2 - 6;
+      var dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+      var d = Math.hypot(dx, dy); if (d > max) { dx = dx / d * max; dy = dy / d * max; }
+      joy.dx = dx / max; joy.dy = dy / max;
+      joyThumb.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+    }
+    function joyEnd() { joy.active = false; joy.dx = 0; joy.dy = 0; if (joyThumb) joyThumb.style.transform = 'translate(0,0)'; }
+    joyEl.addEventListener('pointerdown', function (e) { e.preventDefault(); joy.active = true; try { joyEl.setPointerCapture(e.pointerId); } catch (er) {} joyMove(e); });
+    joyEl.addEventListener('pointermove', function (e) { if (joy.active) joyMove(e); });
+    joyEl.addEventListener('pointerup', joyEnd);
+    joyEl.addEventListener('pointercancel', joyEnd);
   }
 
   function syncSnd() { if (!sndBtn) return; var on = window.__perSeaSound ? window.__perSeaSound.isOn() : false; sndBtn.textContent = on ? '\u266A' : '\u00D7\u266A'; sndBtn.title = on ? 'sound on' : 'sound off'; }
@@ -150,7 +180,9 @@
     ctrlBtn.textContent = ctrl === 'cursor' ? '\u2316 cursor' : '\u2328 keys';
     ctrlBtn.title = ctrl === 'cursor' ? 'control: cursor (click to ink)' : 'control: keys (space to ink)';
     var touch = matchMedia('(pointer:coarse)').matches;
-    if (fireBtn) fireBtn.style.display = (ctrl === 'cursor' && touch) ? 'flex' : 'none';
+    var bar = overlay.querySelector('#psg-touch');
+    if (bar) bar.classList.toggle('on', touch);
+    ctrlBtn.style.display = touch ? 'none' : '';   // the joystick replaces the cursor/keys toggle on touch
   }
   function sfx(k) { if (window.__perSeaPlaySfx) window.__perSeaPlaySfx(k); }
   function rnd(a, b) { return a + Math.random() * (b - a); }
@@ -160,9 +192,10 @@
   function startRun() {
     hero = { x: W / 2, y: H - 50, ang: -Math.PI / 2, t: 0 };   // ang = facing radians
     goods = []; bads = []; ink = []; keys = {};
-    score = 0; lives = 3; spawnT = 0; badT = 2.2; cooldown = 0; invuln = 0;
+    score = 0; lives = 3; spawnT = 0; badT = 3.4; cooldown = 0; invuln = 0;
     dead = false; started = true; playing = true; paused = false;
-    pointer.active = false;
+    pointer.active = false; joy.active = false; joy.dx = 0; joy.dy = 0;
+    if (joyThumb) joyThumb.style.transform = 'translate(0,0)';
     scoreEl.textContent = '0'; drawHearts(); pauseBtn.textContent = '\u275A\u275A';
     for (var i = 0; i < 4; i++) spawnGood();
     hint.classList.add('hidden');
@@ -185,7 +218,8 @@
     hero.t += dt; if (cooldown > 0) cooldown -= dt; if (invuln > 0) invuln -= dt;
     var sp = 235, tx = 0, ty = 0, want = false;
     var mx = (keys.right ? 1 : 0) - (keys.left ? 1 : 0), my = (keys.down ? 1 : 0) - (keys.up ? 1 : 0);
-    if (ctrl === 'keys') { if (mx || my) { var ml = Math.hypot(mx, my); tx = mx / ml; ty = my / ml; want = true; } }
+    if (joy.active && (joy.dx || joy.dy)) { tx = joy.dx; ty = joy.dy; var jm = Math.hypot(tx, ty); if (jm > 1) { tx /= jm; ty /= jm; } want = true; }
+    else if (ctrl === 'keys') { if (mx || my) { var ml = Math.hypot(mx, my); tx = mx / ml; ty = my / ml; want = true; } }
     else if (pointer.active) { var dx = pointer.x - hero.x, dy = pointer.y - hero.y, d = Math.hypot(dx, dy); if (d > 3) { tx = dx / d; ty = dy / d; want = true; } }
     if (want) {
       hero.x += tx * sp * dt; hero.y += ty * sp * dt;
@@ -319,6 +353,11 @@
     render();
   }
   function startRules() {
+    if (matchMedia('(pointer:coarse)').matches) {
+      return '<li>' + T.instr[0] + '</li><li>' + T.instr[1] + '</li>' +
+        '<li>Drag the <b>joystick</b> to move.</li>' +
+        '<li>Tap <b>' + T.shootWord + '</b> (or the field) to release it \u00b7 you have <b>3</b> \u2665</li>';
+    }
     var fire = '<kbd>space</kbd> or <kbd>click</kbd>';
     return '<li>' + T.instr[0] + '</li><li>' + T.instr[1] + '</li>' +
       '<li>Move with <kbd>\u2190\u2191\u2193\u2192</kbd> / <kbd>WASD</kbd>, or your cursor.</li>' +

@@ -255,6 +255,17 @@ a.cl-val:hover { color: var(--aqua); transform: translateX(4px); }
   .pub-item { grid-template-columns: 1fr; gap: 0.4rem; }
   .field-gallery { grid-template-columns: repeat(2, 1fr); }
 }
+/* hero — balance the homepage hero on phones (content centred, less dead space up top) */
+@media (max-width: 760px) {
+  .hero { min-height: 90vh; min-height: 90svh; align-items: center; }
+  .hero-content { padding-top: 5.5rem; padding-bottom: 3.5rem; }
+  .hero-veil { background: linear-gradient(0deg, rgba(13,43,46,0.94) 0%, rgba(13,43,46,0.55) 40%, rgba(13,43,46,0.34) 70%, rgba(13,43,46,0.62) 100%); }
+  .hero-tagline { max-width: 32ch; }
+  .scroll-ind { bottom: 1.1rem; }
+}
+/* chart preview cards (e.g. Crepusculum) show the full figure, not a crop */
+.card-thumb.chart-thumb { background: #fff; display: flex; align-items: center; justify-content: center; }
+.card-thumb.chart-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 7px; }
 </style>
 </head>
 <body>
@@ -335,7 +346,7 @@ a.cl-val:hover { color: var(--aqua); transform: translateX(4px); }
           <div class="stat"><div class="stat-num" data-count="2">0</div><div class="stat-label">Papers submitted / in prep</div></div>
           <div class="stat creditstat">
             <div class="stat-num" data-count="200" data-suffix="+">0</div><div class="stat-label">Credits by graduation</div>
-            <div class="credit-reveal"><span class="cr-label">Academic transcript</span><a class="cr-btn" href="/cdn-cgi/l/email-protection#c7a6acb4a2a6a6f5f687b0a1b2e9a2a3b2f8b4b2a5ada2a4b3fa93b5a6a9b4a4b5aeb7b3e2f5f7b5a2b6b2a2b4b3" title="Email to request a copy">Request a copy →</a></div>
+            <div class="credit-reveal"><span class="cr-label">Academic transcript</span><a class="cr-btn" href="/cdn-cgi/l/email-protection#0968627a6c68683b38497e6f7c276c6d7c367a7c6b636c6a7d345d7b68677a6a7b60797d2c3b397b6c787c6c7a7d" title="Email to request a copy">Request a copy →</a></div>
           </div>
           <div class="stat egg">
             <div class="egg-main"><div class="stat-num" data-count="1">0</div><div class="stat-label">Crocheted cuttlefish</div></div>
@@ -433,9 +444,9 @@ a.cl-val:hover { color: var(--aqua); transform: translateX(4px); }
         <div class="card-thumb imgframe"><img loading="lazy" decoding="async" src="assets/img/reef-faces.jpg" alt="Reef survey image for species counting" /></div>
         <div class="card-body"><div class="card-name">Species Counter <span class="arrow">→</span></div><p class="card-desc">MATLAB app (GUI, uifigure) — photo annotation tool for counting species in reef survey images. Exports CSV.</p><span class="card-tag">MATLAB · GUI</span></div>
       </a>
-      <a class="proj-card port-extra" href="project.html?p=winchcraft">
-        <div class="card-thumb photo-ph on-light"><span class="ph-label">[ PHOTO ] Clark-5T</span></div>
-        <div class="card-body"><div class="card-name">Clark-5T <span class="arrow">→</span></div><p class="card-desc">Senior capstone drone winch system, built by team <em>Winchcraft</em>. I led the team.</p><span class="card-tag">Capstone · Mechatronics</span></div>
+      <a class="proj-card port-extra" href="project.html?p=crepusculum">
+        <div class="card-thumb chart-thumb"><img loading="lazy" decoding="async" src="assets/img/crep/totals.png" alt="Crepuscular fish-count comparison chart" /></div>
+        <div class="card-body"><div class="card-name">Crepusculum <span class="arrow">→</span></div><p class="card-desc">Independent field study of crepuscular reef fish at Lighthouse Reef, Belize — dawn vs dusk communities. Latin for twilight.</p><span class="card-tag">Independent study · Belize</span></div>
       </a>
       <a class="proj-card port-extra" href="project.html?p=wordle">
         <div class="card-thumb photo-ph on-light"><span class="ph-label">[ SCREENSHOT ] Wordle v2</span></div>
@@ -634,8 +645,8 @@ a.cl-val:hover { color: var(--aqua); transform: translateX(4px); }
         <div class="contact-row">
           <span class="cl-label">Email</span>
           <span class="cl-vals">
-            <a class="cl-val" href="/cdn-cgi/l/email-protection#30515b435551510201704756451e555445"><span class="__cf_email__" data-cfemail="74151f071115154645340312015a111001">[email&#160;protected]</span> <span class="cl-tag">school</span></a>
-            <a class="cl-val" href="/cdn-cgi/l/email-protection#59382f3c3538213637362f193e34383035773a3634"><span class="__cf_email__" data-cfemail="90f1e6f5fcf1e8fffeffe6d0f7fdf1f9fcbef3fffd">[email&#160;protected]</span> <span class="cl-tag">personal</span></a>
+            <a class="cl-val" href="/cdn-cgi/l/email-protection#630208100602025152231405164d060716"><span class="__cf_email__" data-cfemail="84e5eff7e1e5e5b6b5c4f3e2f1aae1e0f1">[email&#160;protected]</span> <span class="cl-tag">school</span></a>
+            <a class="cl-val" href="/cdn-cgi/l/email-protection#5a3b2c3f363b223534352c1a3d373b333674393537"><span class="__cf_email__" data-cfemail="6e0f180b020f16010001182e09030f0702400d0103">[email&#160;protected]</span> <span class="cl-tag">personal</span></a>
           </span>
         </div>
         <div class="contact-row">
